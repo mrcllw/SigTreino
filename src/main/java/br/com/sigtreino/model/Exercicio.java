@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.sigtreino.enums.AtividadeFisicaEnum;
 import br.com.sigtreino.enums.GrupoMuscularEnum;
 
@@ -28,6 +30,7 @@ public class Exercicio {
 	@Enumerated(EnumType.STRING)
 	private GrupoMuscularEnum grupamento;
 	
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="academia_id")
 	private Academia academia;

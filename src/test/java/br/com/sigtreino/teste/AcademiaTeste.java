@@ -75,4 +75,13 @@ public class AcademiaTeste {
 		List<Academia> todasAcademias = academiaRep.findAll();
 		assertTrue(todasAcademias.size() > 0);
 	}
+	
+	@Test
+	public void buscarPorLogin(){
+		Academia academiaBuscada = academiaRep.findOne(academia.getId());
+		academiaBuscada.setLogin("buscarPorLogin");
+		Academia academiaLogin = academiaRep.save(academiaBuscada);
+
+		assertNotNull(academiaLogin);
+	}
 }

@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.sigtreino.model.Academia;
 import br.com.sigtreino.model.Aluno;
+import br.com.sigtreino.repository.AcademiaRepository;
 import br.com.sigtreino.repository.AlunoRepository;
 
 @RunWith(SpringRunner.class)
@@ -72,5 +74,32 @@ public class AlunoTeste {
 	public void buscarTodos(){
 		List<Aluno> todosAlunos = alunoRep.findAll();
 		assertTrue(todosAlunos.size() > 0);
+	}
+	
+	@Autowired
+	private AcademiaRepository academiaRep;
+	
+	@Test
+	public void buscarPorAcademia(){
+		Academia academia = new Academia();
+		academia.setNomeFantasiaEmpresarial("A");
+		
+		academiaRep.save(academia);
+		
+		Aluno aluno = new Aluno();
+		Aluno aluno1 = new Aluno();
+		Aluno aluno2 = new Aluno();
+		
+		aluno.setAcademia(academia);
+		aluno1.setAcademia(academia);
+		aluno2.setAcademia(academia);
+		
+		alunoRep.save(aluno);
+		alunoRep.save(aluno1);
+		alunoRep.save(aluno2);
+		
+		List<Aluno> alunos = alunoRep.findByAcademia(academia);
+		
+		assertTrue(alunos.size() == 3);
 	}
 }

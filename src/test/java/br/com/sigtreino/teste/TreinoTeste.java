@@ -19,9 +19,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.sigtreino.enums.GrupoMuscularEnum;
 import br.com.sigtreino.enums.TipoTreinoEnum;
+import br.com.sigtreino.model.Academia;
 import br.com.sigtreino.model.Atividade;
 import br.com.sigtreino.model.Exercicio;
 import br.com.sigtreino.model.Treino;
+import br.com.sigtreino.repository.AcademiaRepository;
 import br.com.sigtreino.repository.ExercicioRepository;
 import br.com.sigtreino.repository.TreinoRepository;
 
@@ -89,5 +91,31 @@ public class TreinoTeste {
 	public void buscarTodos(){
 		List<Treino> todosTreinos = treinoRep.findAll();
 		assertTrue(todosTreinos.size() > 0);		
+	}
+	
+	@Autowired
+	private AcademiaRepository academiaRep;
+	
+	@Test
+	public void buscarPorAcademia(){
+		Academia academia = new Academia();
+		academia.setNomeFantasiaEmpresarial("A");
+		academiaRep.save(academia);
+		
+		Treino treino = new Treino();
+		Treino treino1 = new Treino();
+		Treino treino2 = new Treino();
+		
+		treino.setAcademia(academia);
+		treino1.setAcademia(academia);
+		treino2.setAcademia(academia);
+		
+		treinoRep.save(treino);
+		treinoRep.save(treino1);
+		treinoRep.save(treino2);
+		
+		List<Treino> treinos = treinoRep.findByAcademia(academia);
+		
+		assertTrue(treinos.size() == 3);
 	}
 }

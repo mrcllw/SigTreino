@@ -9,13 +9,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Aluno extends Pessoa{
 	private String nome;
 
+	@JsonIgnore
 	@OneToMany(mappedBy="aluno", cascade=CascadeType.ALL)
 	private List<AlunoTreino> treinos;
 	
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="academia_id")
 	private Academia academia;

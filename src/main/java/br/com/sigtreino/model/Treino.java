@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.sigtreino.enums.TipoTreinoEnum;
 
 @Entity
@@ -32,6 +34,7 @@ public class Treino {
 	@Enumerated(EnumType.STRING)
 	private TipoTreinoEnum tipo;
 	
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="academia_id")
 	private Academia academia;
