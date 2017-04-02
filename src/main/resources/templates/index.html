@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<base href="/"/>
+		<meta charset="UTF-8"/>
+		<title>SigTreino</title>
+		<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+		<link href="./css/style.css" rel="stylesheet"></link>
+	</head>
+	<body ng-controller="indexController">
+		<div>
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/exercicios">Exercicio</a></li>
+				<li><a href="/treinos">Treino</a></li>
+				<li><a href="/alunos">Aluno</a></li>
+			</ul>
+		</div>
+		
+		<div ng-view=""></div>
+		
+		<script type="text/javascript" src="webjars/angularjs/1.5.8/angular.min.js"></script>
+		<script type="text/javascript" src="webjars/angularjs/1.5.8/angular-route.min.js"></script>
+		<script type="text/javascript" src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
+		<script type="text/javascript" src="webjars/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+		<script type="text/javascript" src="webjars/angular-mask/3.0.16/dist/ngMask.min.js"></script>
+
+		<script src="./js/app.js"></script>
+		
+		<script src="./js/controllers/exercicio-controller.js"></script>
+		<script src="./js/controllers/treino-controller.js"></script>
+		<script src="./js/controllers/aluno-controller.js"></script>
+		<script src="./js/controllers/index-controller.js"></script>
+		
+	</body>
+</html>
