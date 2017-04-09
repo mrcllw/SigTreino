@@ -29,5 +29,9 @@ public class AlunoTreinoService {
 	public AlunoTreino buscarPorId(Long id){
 		return alunoTreinoRep.findOne(id);
 	}
+	
+	public List<AlunoTreino> buscarPorAluno(Long id){
+		return alunoTreinoRep.buscarAlunoTreinoPorAlunoId(id);
+	}
 
 }

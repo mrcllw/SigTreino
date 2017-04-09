@@ -11,10 +11,17 @@ app.config(function($routeProvider){
 	}).when('/alunos', {
 		templateUrl : 'view/aluno.html',
 		controller : 'alunoController'
+	}).when('/aluno-treino', {
+		templateUrl : 'view/aluno-treino.html',
+		controller : 'alunoTreinoController'
 	})
 	.otherwise({redirectTo : '/'});
 });
 
 app.config(function($locationProvider){
 	$locationProvider.html5Mode(true);
+});
+
+app.run(function($rootScope){
+	$rootScope.aluno = {};
 });

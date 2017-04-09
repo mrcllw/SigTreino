@@ -45,5 +45,11 @@ public class AlunoTreinoController {
 		alunoTreinoSer.excluir(alunoTreinoBuscado);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	@GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<AlunoTreino>> buscarAlunoTreinoPorAlunoId(@PathVariable Long id){
+		Collection<AlunoTreino> alunoTreinoBuscado = alunoTreinoSer.buscarPorAluno(id);
+		return new ResponseEntity<>(alunoTreinoBuscado, HttpStatus.OK);
+	}
 
 }

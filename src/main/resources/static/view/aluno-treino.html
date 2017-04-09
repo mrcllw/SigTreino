@@ -1,0 +1,38 @@
+<h1>Ficha de treinamento - {{$root.aluno.nome}}</h1>
+<div>
+	<h4>Cadastrar Treino</h4>
+	<div>
+		<select ng-model="alunoTreino.treino"
+				ng-options="treino.nome for treino in treinosCadastro track by treino.id">
+			<option disabled selected value="">Selecione um treino.</option>
+		</select>
+	
+		<div ng-repeat="diaTreino in diasTreino">
+			{{diaTreino}} 
+			<input type="checkbox" 
+			value="{{diaTreino}}" 
+			ng-checked="diasSelecionados.indexOf(diaTreino) > -1" 
+			ng-click="diaChecked(diaTreino)">
+		</div>
+	</div>
+	
+	<button ng-click="cadastrarTreino(alunoTreino)">Cadastrar Treino</button>
+</div>
+
+<div ng-repeat="treino in treinosAluno">
+	<h4>Treino</h4>
+	Nome: {{treino.treino.nome}}
+	Tipo: {{treino.treino.tipo}}
+	<button ng-click="editarTreino(treino)">Editar</button>
+	<button ng-click="removerTreino(treino)">Remover</button>
+	<h4>Atividades</h4>
+	<div ng-repeat="atividade in treino.treino.atividades">
+		Exercicio: {{atividade.exercicio.nome}}
+		Series: {{atividade.serie}}
+		Repeticoes: {{atividade.repeticao}}
+	</div>
+	<h4>Dias</h4>
+	<div ng-repeat="dia in treino.dias">
+		Dia: {{dia}}
+	</div>
+</div>
