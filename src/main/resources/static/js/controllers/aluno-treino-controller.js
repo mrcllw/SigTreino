@@ -1,4 +1,4 @@
-app.controller('alunoTreinoController', function($scope, $rootScope, $http){
+app.controller('alunoTreinoController', function($scope, $rootScope, $http, config){
 	
 	aluno = $rootScope.aluno;
 	$scope.treinosAluno=[];
@@ -8,7 +8,7 @@ app.controller('alunoTreinoController', function($scope, $rootScope, $http){
 	$scope.alunoTreino={};
 
 	$scope.carregarTreinosAluno = function(){
-		$http({method: 'GET', url: 'http://localhost:6123/aluno/treino/' + aluno.id}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl + '/admin/aluno/treino/' + aluno.id}).then(function(response){
 			$scope.treinosAluno = response.data;
 		}, function(response){
 			console.log(response);
@@ -16,7 +16,7 @@ app.controller('alunoTreinoController', function($scope, $rootScope, $http){
 	};
 	
 	$scope.carregarTreinosCadastro = function(){
-		$http({method: 'GET', url: 'http://localhost:6123/treino'}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl + '/admin/treino'}).then(function(response){
 			$scope.treinosCadastro = response.data;
 		}, function(response){
 			console.log(response);
@@ -24,7 +24,7 @@ app.controller('alunoTreinoController', function($scope, $rootScope, $http){
 	};
 	
 	$scope.carregarDiasTreino = function(){
-		$http({method: 'GET', url: 'http://localhost:6123/dias-treino'}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl + '/dias-treino'}).then(function(response){
 			$scope.diasTreino = response.data;
 		}, function(response){
 			console.log(response);
@@ -44,7 +44,7 @@ app.controller('alunoTreinoController', function($scope, $rootScope, $http){
 	$scope.cadastrarTreino = function(alunoTreino){
 		alunoTreino.aluno = aluno;
 		alunoTreino.dias = $scope.diasSelecionados;
-		$http({method: 'POST', url: 'http://localhost:6123/aluno/treino', data:alunoTreino}).then(function(response){
+		$http({method: 'POST', url: config.baseUrl + '/admin/aluno/treino', data:alunoTreino}).then(function(response){
 			$scope.carregarTreinosAluno();
 			$scope.alunoTreino.treino = {};
 			$scope.diasSelecionados = [];
@@ -60,7 +60,7 @@ app.controller('alunoTreinoController', function($scope, $rootScope, $http){
 	};
 	
 	$scope.removerTreino = function(treino){
-		$http({method: 'DELETE', url: 'http://localhost:6123/aluno/treino/' + treino.id}).then(function(response){
+		$http({method: 'DELETE', url: config.baseUrl + '/admin/aluno/treino/' + treino.id}).then(function(response){
 			$scope.carregarTreinosAluno();
 		}, function(response){
 			console.log(response);

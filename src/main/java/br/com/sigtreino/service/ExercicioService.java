@@ -2,6 +2,8 @@ package br.com.sigtreino.service;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,15 @@ public class ExercicioService {
 	@Autowired
 	private ExercicioRepository exercicioRep;
 	
+	@Autowired
+	private AcademiaService academiaSer;
+	
 	public Exercicio salvar(Exercicio exercicio){
+		try{
+			exercicio.setAcademia(academiaSer.academiaLogada());
+		}catch(ServletException e){
+			e.printStackTrace();
+		}
 		return exercicioRep.save(exercicio);
 	}
 	
@@ -23,8 +33,12 @@ public class ExercicioService {
 		return exercicioRep.findAll();
 	}
 	
-	public void excluir(Exercicio exercicio){
-		exercicioRep.delete(exercicio);
+	public void excluir(Exercicio exercicio) throws Exception{
+		try{
+			exercicioRep.delete(exercicio);
+		}catch(Exception e){
+			throw new Exception("Exercicio não pode ser excluido pois esta vinculado a um ou mais treinos.");
+		}
 	}
 	
 	public Exercicio buscarPorId(Long id){
@@ -33,5 +47,9 @@ public class ExercicioService {
 	
 	public List<Exercicio> buscarPorAcademia(Academia academia){
 		return exercicioRep.findByAcademia(academia);
+	}
+	
+	public List<Exercicio> buscarPorAcademia() throws ServletException{
+		return exercicioRep.findByAcademia(academiaSer.academiaLogada());
 	}
 }

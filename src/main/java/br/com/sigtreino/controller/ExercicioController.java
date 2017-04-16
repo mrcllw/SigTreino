@@ -2,6 +2,8 @@ package br.com.sigtreino.controller;
 
 import java.util.Collection;
 
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +20,7 @@ import br.com.sigtreino.model.Exercicio;
 import br.com.sigtreino.service.ExercicioService;
 
 @RestController
-@RequestMapping("/exercicio")
+@RequestMapping("/admin/exercicio")
 public class ExercicioController {
 	
 	@Autowired
@@ -30,11 +32,11 @@ public class ExercicioController {
 		return new ResponseEntity<>(exercicioAdicionado, HttpStatus.OK);
 	}
 	
-	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Exercicio>> buscarTodosExercicios(){
-		Collection<Exercicio> exerciciosBuscados = exercicioSer.buscarTodos();
-		return new ResponseEntity<>(exerciciosBuscados, HttpStatus.OK);
-	}
+//	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<Collection<Exercicio>> buscarTodosExercicios(){
+//		Collection<Exercicio> exerciciosBuscados = exercicioSer.buscarTodos();
+//		return new ResponseEntity<>(exerciciosBuscados, HttpStatus.OK);
+//	}
 	
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Exercicio> removerExercicio(@PathVariable Long id) throws Exception{
@@ -46,10 +48,10 @@ public class ExercicioController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-//	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<Collection<Exercicio>> buscarTodosExerciciosPorAcademia(){
-//		Collection<Exercicio> exerciciosBuscados = exercicioSer.buscarPorAcademia();
-//		return new ResponseEntity<>(exerciciosBuscados, HttpStatus.OK);
-//	}
+	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<Exercicio>> buscarTodosExerciciosPorAcademia() throws ServletException{
+		Collection<Exercicio> exerciciosBuscados = exercicioSer.buscarPorAcademia();
+		return new ResponseEntity<>(exerciciosBuscados, HttpStatus.OK);
+	}
 
 }

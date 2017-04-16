@@ -18,7 +18,7 @@ import br.com.sigtreino.model.AlunoTreino;
 import br.com.sigtreino.service.AlunoTreinoService;
 
 @RestController
-@RequestMapping("/aluno/treino")
+@RequestMapping("/admin/aluno/treino")
 public class AlunoTreinoController {
 	
 	@Autowired

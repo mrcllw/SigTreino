@@ -2,6 +2,8 @@ package br.com.sigtreino.controller;
 
 import java.util.Collection;
 
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +20,7 @@ import br.com.sigtreino.model.Aluno;
 import br.com.sigtreino.service.AlunoService;
 
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("/admin/aluno")
 public class AlunoController {
 	
 	@Autowired
@@ -30,11 +32,11 @@ public class AlunoController {
 		return new ResponseEntity<>(alunoAdicionado, HttpStatus.OK);
 	}
 	
-	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Aluno>> buscarTodosAlunos(){
-		Collection<Aluno> alunosBuscados = alunoSer.buscarTodos();
-		return new ResponseEntity<>(alunosBuscados, HttpStatus.OK);
-	}
+//	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<Collection<Aluno>> buscarTodosAlunos(){
+//		Collection<Aluno> alunosBuscados = alunoSer.buscarTodos();
+//		return new ResponseEntity<>(alunosBuscados, HttpStatus.OK);
+//	}
 		
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Aluno> removerAluno(@PathVariable Long id){
@@ -46,10 +48,10 @@ public class AlunoController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-//	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<Collection<Aluno>> buscarAlunosPorAcademia(){
-//		Collection<Aluno> alunosPorAcademia = alunoSer.buscarPorAcademia();
-//		return new ResponseEntity<>(alunosPorAcademia, HttpStatus.OK);
-//	}
+	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<Aluno>> buscarAlunosPorAcademia() throws ServletException{
+		Collection<Aluno> alunosPorAcademia = alunoSer.buscarPorAcademia();
+		return new ResponseEntity<>(alunosPorAcademia, HttpStatus.OK);
+	}
 
 }

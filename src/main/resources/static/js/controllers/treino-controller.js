@@ -1,4 +1,4 @@
-app.controller('treinoController', function($scope, $http){
+app.controller('treinoController', function($scope, $http, config){
 	
 	//TREINO
 	
@@ -7,7 +7,7 @@ app.controller('treinoController', function($scope, $http){
 	$scope.tipos=[];
 	
 	$scope.carregarTipoTreino = function(){
-		$http({method: 'GET', url: 'http://localhost:6123/tipo-treino'}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl + '/tipo-treino'}).then(function(response){
 			$scope.tipos = response.data;
 		}, function(response){
 			console.log(response);
@@ -15,7 +15,7 @@ app.controller('treinoController', function($scope, $http){
 	};
 	
 	$scope.carregarTreinos = function(){
-		$http({method: 'GET', url: 'http://localhost:6123/treino'}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl + '/admin/treino'}).then(function(response){
 			$scope.treinos = response.data;
 		}, function(response){
 			console.log(response);
@@ -24,7 +24,7 @@ app.controller('treinoController', function($scope, $http){
 	
 	$scope.salvarTreino = function(treino){
 		treino.atividades = $scope.atividades;
-		$http({method: 'POST', url: 'http://localhost:6123/treino', data: treino}).then(function(response){
+		$http({method: 'POST', url: config.baseUrl + '/admin/treino', data: treino}).then(function(response){
 			$scope.treino={};
 			$scope.atividades=[];
 			$scope.carregarTreinos();
@@ -39,7 +39,7 @@ app.controller('treinoController', function($scope, $http){
 	};
 	
 	$scope.removerTreino = function(treino){
-		$http({method: 'DELETE', url: 'http://localhost:6123/treino/' + treino.id}).then(function(response){
+		$http({method: 'DELETE', url: config.baseUrl + '/admin/treino/' + treino.id}).then(function(response){
 			$scope.carregarTreinos();
 		}, function(response){
 			console.log(response);
@@ -58,7 +58,7 @@ app.controller('treinoController', function($scope, $http){
 	var isEditIndex = "";
 	
 	$scope.carregarExercicios = function(){
-		$http({method: 'GET', url: 'http://localhost:6123/exercicio'}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl + '/admin/exercicio'}).then(function(response){
 			$scope.exercicios = response.data;
 		}, function(response){
 			console.log(response);

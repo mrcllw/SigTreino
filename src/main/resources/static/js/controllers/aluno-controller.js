@@ -1,9 +1,9 @@
-app.controller('alunoController', function($scope, $rootScope, $http){
+app.controller('alunoController', function($scope, $rootScope, $http, config){
 	$scope.aluno={};
 	$scope.alunos=[];
 	
 	$scope.carregarAlunos = function(){
-		$http({method: 'GET', url: 'http://localhost:6123/aluno'}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl + '/admin/aluno'}).then(function(response){
 			$scope.alunos = response.data;
 		}, function(response){
 			console.log(response);
@@ -11,7 +11,7 @@ app.controller('alunoController', function($scope, $rootScope, $http){
 	};
 	
 	$scope.cadastrarAluno = function(aluno){
-		$http({method: 'POST', url: 'http://localhost:6123/aluno', data:aluno}).then(function(response){
+		$http({method: 'POST', url: config.baseUrl + '/admin/aluno', data:aluno}).then(function(response){
 			$scope.aluno={};
 			$scope.carregarAlunos();
 		}, function(response){
@@ -24,7 +24,7 @@ app.controller('alunoController', function($scope, $rootScope, $http){
 	};
 	
 	$scope.removerAluno = function(aluno){
-		$http({method: 'DELETE', url: 'http://localhost:6123/aluno/' + aluno.id}).then(function(response){
+		$http({method: 'DELETE', url: config.baseUrl + '/admin/aluno/' + aluno.id}).then(function(response){
 			$scope.carregarAlunos();
 		}, function(response){
 			console.log(response);

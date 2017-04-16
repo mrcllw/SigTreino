@@ -11,9 +11,12 @@
 		<div>
 			<ul>
 				<li><a href="/">Home</a></li>
-				<li><a href="/exercicios">Exercicio</a></li>
-				<li><a href="/treinos">Treino</a></li>
-				<li><a href="/alunos">Aluno</a></li>
+				<li ng-show="!$root.isLogin"><a href="/academia">Academia</a></li>
+				<li ng-show="$root.isLogin"><a href="/exercicios">Exercicio</a></li>
+				<li ng-show="$root.isLogin"><a href="/treinos">Treino</a></li>
+				<li ng-show="$root.isLogin"><a href="/alunos">Aluno</a></li>
+				<li ng-show="!$root.isLogin"><a href="/login">Login</a></li>
+				<li ng-show="$root.isLogin"><a href="" ng-click="logoff()">Logoff</a></li>
 			</ul>
 		</div>
 		
@@ -32,6 +35,11 @@
 		<script src="./js/controllers/aluno-controller.js"></script>
 		<script src="./js/controllers/index-controller.js"></script>
 		<script src="./js/controllers/aluno-treino-controller.js"></script>
+		<script src="./js/controllers/academia-controller.js"></script>
+		<script src="./js/controllers/login-controller.js"></script>
+		
+		<script src="./js/interceptor/token-interceptor.js"></script>
+		<script src="./js/value/config-value.js"></script>
 		
 	</body>
 </html>

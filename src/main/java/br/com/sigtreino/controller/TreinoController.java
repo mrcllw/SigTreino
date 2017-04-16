@@ -2,6 +2,8 @@ package br.com.sigtreino.controller;
 
 import java.util.Collection;
 
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +20,7 @@ import br.com.sigtreino.model.Treino;
 import br.com.sigtreino.service.TreinoService;
 
 @RestController
-@RequestMapping("/treino")
+@RequestMapping("/admin/treino")
 public class TreinoController {
 	
 	@Autowired
@@ -30,11 +32,11 @@ public class TreinoController {
 		return new ResponseEntity<>(treinoAdicionado, HttpStatus.OK);
 	}
 	
-	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Treino>> buscarTodosTreinos(){
-		Collection<Treino> treinosBuscados = treinoSer.buscarTodos();
-		return new ResponseEntity<>(treinosBuscados, HttpStatus.OK);
-	}
+//	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<Collection<Treino>> buscarTodosTreinos(){
+//		Collection<Treino> treinosBuscados = treinoSer.buscarTodos();
+//		return new ResponseEntity<>(treinosBuscados, HttpStatus.OK);
+//	}
 	
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Treino> removerTreino(@PathVariable Long id) throws Exception{
@@ -46,10 +48,10 @@ public class TreinoController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-//	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<Collection<Treino>> buscarTreinoPorAcademia() {
-//		Collection<Treino> treinosBuscados = treinoSer.buscarPorAcademia();
-//		return new ResponseEntity<>(treinosBuscados, HttpStatus.OK);
-//	}
+	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<Treino>> buscarTreinoPorAcademia() throws ServletException {
+		Collection<Treino> treinosBuscados = treinoSer.buscarPorAcademia();
+		return new ResponseEntity<>(treinosBuscados, HttpStatus.OK);
+	}
 
 }

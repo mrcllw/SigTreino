@@ -18,7 +18,7 @@ import br.com.sigtreino.model.Atividade;
 import br.com.sigtreino.service.AtividadeService;
 
 @RestController
-@RequestMapping("/atividade")
+@RequestMapping("/admin/atividade")
 public class AtividadeController {
 	
 	@Autowired

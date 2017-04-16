@@ -2,6 +2,8 @@ package br.com.sigtreino.service;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,15 @@ public class AlunoService {
 	@Autowired
 	private AlunoRepository alunoRep;
 	
+	@Autowired
+	private AcademiaService academiaSer;
+	
 	public Aluno salvar(Aluno aluno){
+		try{
+			aluno.setAcademia(academiaSer.academiaLogada());
+		}catch(ServletException e){
+			e.printStackTrace();
+		}
 		return alunoRep.save(aluno);
 	}
 	
@@ -33,6 +43,10 @@ public class AlunoService {
 	
 	public List<Aluno> buscarPorAcademia(Academia academia){
 		return alunoRep.findByAcademia(academia);
+	}
+	
+	public List<Aluno> buscarPorAcademia() throws ServletException{
+		return alunoRep.findByAcademia(academiaSer.academiaLogada());
 	}
 
 }
