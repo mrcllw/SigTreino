@@ -1,0 +1,85 @@
+<div class="container">
+	<h1>Cadastro Treino</h1>
+	<form>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-8">
+					<label>Nome</label>
+					<input type="text" class="form-control" placeholder="Nome" ng-model="treino.nome">
+				</div>
+				<div class="col-md-4">	
+	    			<label>Tipo:</label>
+	    			<select class="form-control" ng-model="treino.tipo">
+	    				<option selected disabled value="">Selecione um grupo</option>
+	      				<option ng-repeat="tipo in tipos" value="{{tipo}}">{{tipo}}</option>
+	    			</select>
+	    		</div>
+	    	</div>
+  		</div>
+  		
+  		<div class="form-group">
+  			<div class="row">
+	  			<div class="col-md-7">
+	  				<label>Exercicio:</label>
+	  				<select class="form-control" ng-model="atividade.exercicio"
+	  						ng-options="exercicio.nome for exercicio in exercicios track by exercicio.id">
+	  					<option selected disabled value="">Selecione um exercicio</option>
+	  				</select>
+	  			</div>
+	  			<div class="col-md-2">
+	  				<label>Series:</label>
+	  				<input type="number" class="form-control" ng-model="atividade.serie">
+	  			</div>
+	  			<div class="col-md-3">
+	  				<label>Repeticoes:</label>
+	  				<div class="input-group">
+		  				<input type="number" class="form-control" ng-model="atividade.repeticao">
+		  				<span class="input-group-btn">
+		  					<button type="button" class="btn btn-success" ng-click="adicionarAtividade(atividade)">
+		  						<span class="glyphicon glyphicon-plus"></span>
+		  					</button>
+		  				</span>
+		  			</div>
+	  			</div>
+	  		</div>
+  		</div>
+  		
+  		<div class="table-responsive">
+		<table class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th>Exercicios</th>
+					<th>Series</th>
+					<th>Repeticoes</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="atividade in atividades track by $index">
+					<td>{{atividade.exercicio.nome}}</td>
+					<td>{{atividade.serie}}</td>
+					<td>{{atividade.repeticao}}</td>
+					<td align="right">
+						<button type="button" class="btn btn-warning btn-xs" ng-click="editarAtividade(atividade, $index)">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<button type="button" class="btn btn-danger btn-xs" ng-click="removerAtividade($index)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="4">Exercicios Adicionados: {{atividades.length}}</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+  		
+  		<div class="form-group">
+  			<button type="button" class="btn btn-primary" ng-click="salvarTreino(treino)">Salvar Treino</button>
+  			<button type="button" class="btn btn-danger" ng-click="limparTreino()">Cancelar</button>
+  		</div>
+	</form>
+</div>

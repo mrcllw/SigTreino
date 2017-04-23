@@ -20,6 +20,51 @@
 			</ul>
 		</div>
 		
+		<div>
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" ng-click="menuRedux = !menuRedux" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/">SigTreino</a>
+					</div>
+					
+					<div class="collapse navbar-collapse" uib-collapse="menuRedux">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown" uib-dropdown>
+								<a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button" aria-haspopup="true"
+								aria-expanded="false">Meus Dados <span class="caret"></span></a>
+								<ul class="dropdown-menu" uib-dropdown-menu>
+									<li><a href="#">Perfil</a></li>
+									<li><a href="#">Configurações</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#">Gerenciamento</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Sair</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div class="container" ng-show="$root.isLogin">
+				<ul class="nav nav-pills nav-justified" style="border-bottom:1px solid #e7e7e7;">
+					<li role="presentation">
+						<a href="/exercicios">Exercicios</a>
+					</li>
+					<li role="presentation">
+						<a href="/treinos">Treinos</a>
+					</li>
+					<li role="presentation">
+						<a href="/alunos">Alunos</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
 		<div ng-view=""></div>
 		
 		<script type="text/javascript" src="webjars/angularjs/1.5.8/angular.min.js"></script>

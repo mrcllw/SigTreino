@@ -1,0 +1,49 @@
+<div class="container">
+	<div class="row">
+		<form>
+			<div class="form-group">
+				<div class="col-xs-4 col-md-4">
+					<input type="text" class="form-control" ng-model="filtroGrupoMuscular" placeholder="Buscar">
+				</div>
+				<div class="col-md-8" align="right">
+					<button type="button" class="btn btn-primary" ng-click="cadastrarExercicio()">
+						<span class="glyphicon glyphicon-plus"></span> Adicionar Exercicio
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<div class="table-responsive">
+		<table class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Nome</th>
+					<th>Descricao</th>
+					<th>Grupo Muscular</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="exercicio in exercicios | filter:filtroGrupoMuscular">
+					<td>
+						<button type="button" class="btn btn-warning btn-xs" ng-click="editarExercicio(exercicio)">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<button type="button" class="btn btn-danger btn-xs" ng-click="removerExercicio(exercicio)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td>
+					<td>{{exercicio.nome}}</td>
+					<td>{{exercicio.descricao}}</td>
+					<td>{{exercicio.grupamento}}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="4">Exercicios Cadatrados: {{exercicios.length}}</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>

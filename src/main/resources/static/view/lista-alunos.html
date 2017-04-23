@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="row">
+		<form>
+			<div class="form-group">
+				<div class="col-xs-4 col-md-4">
+					<input type="text" class="form-control" ng-model="filtroAluno" placeholder="Buscar">
+				</div>
+				<div class="col-md-8" align="right">
+					<button type="button" class="btn btn-primary" ng-click="">
+						<span class="glyphicon glyphicon-plus"></span> Adicionar Aluno
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<div class="table-responsive">
+		<table class="table table-hover table-condensed">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Nome</th>
+					<th>Telefone</th>
+					<th>Email</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="aluno in alunos | filter:filtroAluno">
+					<td>
+						<button type="button" class="btn btn-warning btn-xs" ng-click="">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<button type="button" class="btn btn-danger btn-xs" ng-click="">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td>
+					<td>{{aluno.nome}}</td>
+					<td>{{aluno.telefone}}</td>
+					<td>{{aluno.email}}</td>
+					<td align="right">
+						<button type="button" class="btn btn-primary btn-xs" ng-click="">
+							<span class="glyphicon glyphicon-eye-open"></span> Treinos
+						</button>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5">Alunos Cadatrados: {{alunos.length}}</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>

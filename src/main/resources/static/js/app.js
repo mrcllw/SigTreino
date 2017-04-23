@@ -3,13 +3,19 @@ var app = angular.module('app',['ui.bootstrap', 'ngRoute']);
 app.config(function($routeProvider){
 	$routeProvider
 	.when('/exercicios', {
-		templateUrl : 'view/exercicio.html',
+		templateUrl : 'view/lista-exercicios.html',
+		controller : 'exercicioController'
+	}).when('/cadastrar-exercicio', {
+		templateUrl : 'view/cadastrar-exercicio.html',
 		controller : 'exercicioController'
 	}).when('/treinos', {
-		templateUrl : 'view/treino.html',
+		templateUrl : 'view/lista-treinos.html',
+		controller : 'treinoController'
+	}).when('/cadastrar-treino', {
+		templateUrl : 'view/cadastrar-treino.html',
 		controller : 'treinoController'
 	}).when('/alunos', {
-		templateUrl : 'view/aluno.html',
+		templateUrl : 'view/lista-alunos.html',
 		controller : 'alunoController'
 	}).when('/aluno-treino', {
 		templateUrl : 'view/aluno-treino.html',
@@ -34,4 +40,8 @@ app.config(function($httpProvider){
 
 app.run(function($rootScope){
 	$rootScope.aluno = {};
+	$rootScope.exercicio = {};
+	$rootScope.treino = {};
+	$rootScope.atividades = [];
+	$rootScope.isLogin = false;
 });

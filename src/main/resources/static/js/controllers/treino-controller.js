@@ -1,8 +1,8 @@
-app.controller('treinoController', function($scope, $http, config){
+app.controller('treinoController', function($scope, $rootScope, $location, $http, config){
 	
 	//TREINO
 	
-	$scope.treino={};
+	$scope.treino= $rootScope.treino;
 	$scope.treinos=[];
 	$scope.tipos=[];
 	
@@ -28,6 +28,7 @@ app.controller('treinoController', function($scope, $http, config){
 			$scope.treino={};
 			$scope.atividades=[];
 			$scope.carregarTreinos();
+			$location.path('/treinos');
 		}, function(response){
 			console.log(response);
 		});
@@ -36,6 +37,7 @@ app.controller('treinoController', function($scope, $http, config){
 	$scope.editarTreino = function(treino){
 		$scope.treino = treino;
 		$scope.atividades = treino.atividades;
+		$location.path('/cadastrar-treino');
 	};
 	
 	$scope.removerTreino = function(treino){
@@ -44,6 +46,16 @@ app.controller('treinoController', function($scope, $http, config){
 		}, function(response){
 			console.log(response);
 		});
+	};
+	
+	$scope.cadastrarTreino = function(){
+		$location.path('/cadastrar-treino');
+	};
+	
+	$scope.limparTreino = function(){
+		$rootScope.treino = {};
+		$rootScope.atividades = [];
+		$location.path('/treinos');
 	}
 	
 	$scope.carregarTipoTreino();
@@ -54,6 +66,7 @@ app.controller('treinoController', function($scope, $http, config){
 	$scope.exercicios=[];
 	$scope.atividade={};
 	$scope.atividades=[];
+	$scope.atividades=$rootScope.atividades;
 	var isEdit = false;
 	var isEditIndex = "";
 	

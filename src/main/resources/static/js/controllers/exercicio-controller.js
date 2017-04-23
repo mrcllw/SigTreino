@@ -1,5 +1,5 @@
-app.controller('exercicioController', function($scope, $http, config){
-	$scope.exercicio = {};
+app.controller('exercicioController', function($scope, $rootScope, $http, $location, config){
+	$scope.exercicio = $rootScope.exercicio;
 	$scope.exercicios=[];
 	$scope.grupamentos = [];
 	
@@ -23,6 +23,7 @@ app.controller('exercicioController', function($scope, $http, config){
 		$http({method: 'POST', url: config.baseUrl + '/admin/exercicio', data: exercicio}).then(function(response){
 			$scope.carregarExercicios();
 			$scope.exercicio={};
+			$location.path('/exercicios');
 		}, function(response){
 			console.log(response);
 		});
@@ -30,6 +31,7 @@ app.controller('exercicioController', function($scope, $http, config){
 	
 	$scope.editarExercicio = function(exercicio){
 		$scope.exercicio = exercicio;
+		$location.path('/cadastrar-exercicio');
 	};
 	
 	$scope.removerExercicio = function(exercicio){
@@ -38,7 +40,16 @@ app.controller('exercicioController', function($scope, $http, config){
 		}, function(response){
 			console.log(response);
 		});
-	}
+	};
+	
+	$scope.cadastrarExercicio = function(){
+		$location.path('/cadastrar-exercicio');
+	};
+	
+	$scope.limparExercicio = function(){
+		$rootScope.exercicio={};
+		$location.path('/exercicios');
+	};
 	
 	$scope.carregarGruposMuscular();
 	$scope.carregarExercicios();
