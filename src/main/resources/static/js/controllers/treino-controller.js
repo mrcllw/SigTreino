@@ -2,12 +2,12 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 	
 	//TREINO
 	
-	$scope.treino= $rootScope.treino;
+	$scope.treino=$rootScope.treino;
 	$scope.treinos=[];
 	$scope.tipos=[];
 	
 	$scope.carregarTipoTreino = function(){
-		$http({method: 'GET', url: config.baseUrl + '/tipo-treino'}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl +  '/tipo-treino'}).then(function(response){
 			$scope.tipos = response.data;
 		}, function(response){
 			console.log(response);
@@ -25,8 +25,8 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 	$scope.salvarTreino = function(treino){
 		treino.atividades = $scope.atividades;
 		$http({method: 'POST', url: config.baseUrl + '/admin/treino', data: treino}).then(function(response){
-			$scope.treino={};
-			$scope.atividades=[];
+			$rootScope.treino={};
+			$rootScope.atividades=[];
 			$scope.carregarTreinos();
 			$location.path('/treinos');
 		}, function(response){
@@ -35,8 +35,9 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 	};
 	
 	$scope.editarTreino = function(treino){
-		$scope.treino = treino;
-		$scope.atividades = treino.atividades;
+		$rootScope.treino = treino;
+		$rootScope.atividades = treino.atividades;
+		$rootScope.somenteLeitura = false;
 		$location.path('/cadastrar-treino');
 	};
 	
@@ -49,6 +50,9 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 	};
 	
 	$scope.cadastrarTreino = function(){
+		$rootScope.treino = {};
+		$rootScope.atividades=[];
+		$rootScope.somenteLeitura = false;
 		$location.path('/cadastrar-treino');
 	};
 	
@@ -65,7 +69,6 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 	
 	$scope.exercicios=[];
 	$scope.atividade={};
-	$scope.atividades=[];
 	$scope.atividades=$rootScope.atividades;
 	var isEdit = false;
 	var isEditIndex = "";
@@ -97,6 +100,12 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 		$scope.atividade = angular.copy(atividade);
 		isEdit = true;
 		isEditIndex = index;
+	};
+	
+	$scope.detalhesExercicio = function(exercicio){
+		$rootScope.exercicio = exercicio;
+		$rootScope.somenteLeituraExercicio = true;
+		$location.path('/cadastrar-exercicio');
 	};
 	
 	$scope.carregarExercicios();

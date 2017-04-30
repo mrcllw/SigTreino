@@ -7,41 +7,44 @@
 				</div>
 				<div class="col-md-8" align="right">
 					<button type="button" class="btn btn-primary" ng-click="cadastrarExercicio()">
-						<span class="glyphicon glyphicon-plus"></span> Adicionar Exercicio
+						<span class="glyphicon glyphicon-plus"></span> Cadastrar Exercício
 					</button>
 				</div>
 			</div>
 		</form>
 	</div>
-	
+	<hr />
 	<div class="table-responsive">
 		<table class="table table-hover table-condensed">
 			<thead>
 				<tr>
 					<th></th>
 					<th>Nome</th>
-					<th>Descricao</th>
+					<th>Descrição</th>
 					<th>Grupo Muscular</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="exercicio in exercicios | filter:filtroGrupoMuscular">
-					<td>
+					<td class="col-md-3">
 						<button type="button" class="btn btn-warning btn-xs" ng-click="editarExercicio(exercicio)">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</button>
 						<button type="button" class="btn btn-danger btn-xs" ng-click="removerExercicio(exercicio)">
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>
+						<button type="button" class="btn btn-primary btn-xs" ng-click="detalhesExercicio(exercicio)">
+							<span class="glyphicon glyphicon-eye-open"></span>
+						</button>
 					</td>
-					<td>{{exercicio.nome}}</td>
-					<td>{{exercicio.descricao}}</td>
-					<td>{{exercicio.grupamento}}</td>
+					<td class="col-md-3 min-caracter">{{exercicio.nome}}</td>
+					<td class="col-md-3 min-caracter">{{exercicio.descricao}}</td>
+					<td class="col-md-3">{{exercicio.grupamento}}</td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="4">Exercicios Cadatrados: {{exercicios.length}}</td>
+					<td colspan="4">Exercícios Cadatrados: {{exercicios.length}}</td>
 				</tr>
 			</tfoot>
 		</table>

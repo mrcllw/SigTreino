@@ -1,4 +1,4 @@
-app.controller('alunoTreinoController', function($scope, $rootScope, $http, config){
+app.controller('alunoTreinoController', function($scope, $location, $rootScope, $http, config){
 	
 	aluno = $rootScope.aluno;
 	$scope.treinosAluno=[];
@@ -9,7 +9,7 @@ app.controller('alunoTreinoController', function($scope, $rootScope, $http, conf
 
 	$scope.carregarTreinosAluno = function(){
 		$http({method: 'GET', url: config.baseUrl + '/admin/aluno/treino/' + aluno.id}).then(function(response){
-			$scope.treinosAluno = response.data;
+			$scope.treinosAluno = response.data;			
 		}, function(response){
 			console.log(response);
 		});
@@ -29,6 +29,10 @@ app.controller('alunoTreinoController', function($scope, $rootScope, $http, conf
 		}, function(response){
 			console.log(response);
 		});
+	};
+	
+	$scope.definirAjustar = function(){
+		$location.path('/cadastrar-aluno-treino');
 	};
 	
 	$scope.diaChecked = function(dia){
@@ -67,7 +71,23 @@ app.controller('alunoTreinoController', function($scope, $rootScope, $http, conf
 		});
 	};
 	
+	$scope.detalhesAlunoTreino = function(treino){
+		$rootScope.treino = treino.treino;
+		$rootScope.atividades = treino.treino.atividades;
+		$location.path('/cadastrar-treino');
+		$rootScope.somenteLeitura = true;
+	};
+	
 	$scope.carregarTreinosAluno();
 	$scope.carregarTreinosCadastro();
 	$scope.carregarDiasTreino();
+	
+	$scope.treinosDia = function(treino, dia){
+		for(var i = 0; i < treino.dias.length; i++){
+			if(treino.dias[i].toLowerCase() == dia.toLowerCase()){
+				return true
+			};
+		};
+	};
+
 });

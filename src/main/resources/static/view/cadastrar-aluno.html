@@ -1,0 +1,78 @@
+<div class="container">
+	<h1>Cadastro Aluno</h1>
+	<hr />
+	<form>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-9">
+					<label>Nome</label> 
+					<input ng-model="aluno.nome" class="form-control" placeholder="Nome">
+				</div>
+				<div class="form-group col-md-3">
+					<label>CPF</label> 
+					<input ng-model="aluno.CPF" class="form-control" placeholder="CPF"> 
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-3">
+					<label>Data de Nascimento</label>
+					<input ng-model="aluno.dataNascimento" class="form-control" placeholder="Data de Nascimento">
+				</div>
+				<div class="col-md-3">
+					<label>Telefone</label> 
+					<input ng-model="aluno.telefone" class="form-control"  placeholder="Telefone"> 
+				</div>
+				<div class="col-md-6">
+					<label>Email</label>
+					<input ng-model="aluno.email" class="form-control"  placeholder="Email">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-2">
+					<label>CEP</label> 
+					<input ng-model="aluno.CEP" class="form-control"  placeholder="CEP">
+				</div>
+				<div class="col-md-5">
+					<label>Endereço</label> 
+					<input ng-model="aluno.logradouro" class="form-control" placeholder="Endereco">
+				</div>
+				<div class="col-md-3">
+					<label>Bairro</label> 
+					<input ng-model="aluno.bairro" class="form-control" placeholder="Bairro">
+				</div>
+				<div class="col-md-2">
+					<label>Número</label> 
+					<input ng-model="aluno.numero" class="form-control" placeholder="Numero">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-6">
+					<label>Complemento</label> 
+					<input ng-model="aluno.complemento" class="form-control" placeholder="Complemento">
+				</div>
+				<div class="col-md-4">
+					<label>Cidade</label> 
+					<input ng-model="aluno.cidade" class="form-control" placeholder="Cidade">
+				</div>
+				<div class="col-md-2">
+					<label>Estado</label> 
+					<input ng-model="aluno.estado" class="form-control" placeholder="Estado">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<button type="button" class="btn btn-primary" ng-click="salvarAluno(aluno)">
+				<span class="glyphicon glyphicon-plus"></span> Salvar
+			</button>
+			<button type="button" class="btn btn-danger" ng-click="limparAluno()">
+				<span class="glyphicon glyphicon-remove"></span> Cancelar
+			</button>
+		</div>
+	</form>
+</div>

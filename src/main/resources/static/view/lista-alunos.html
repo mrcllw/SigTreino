@@ -6,14 +6,14 @@
 					<input type="text" class="form-control" ng-model="filtroAluno" placeholder="Buscar">
 				</div>
 				<div class="col-md-8" align="right">
-					<button type="button" class="btn btn-primary" ng-click="">
-						<span class="glyphicon glyphicon-plus"></span> Adicionar Aluno
+					<button type="button" class="btn btn-primary" ng-click="cadastrarAluno()">
+						<span class="glyphicon glyphicon-plus"></span> Cadastrar Aluno
 					</button>
 				</div>
 			</div>
 		</form>
 	</div>
-	
+	<hr />
 	<div class="table-responsive">
 		<table class="table table-hover table-condensed">
 			<thead>
@@ -27,19 +27,19 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="aluno in alunos | filter:filtroAluno">
-					<td>
-						<button type="button" class="btn btn-warning btn-xs" ng-click="">
+					<td class="col-md-2">
+						<button type="button" class="btn btn-warning btn-xs" ng-click="editarAluno(aluno)">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</button>
-						<button type="button" class="btn btn-danger btn-xs" ng-click="">
+						<button type="button" class="btn btn-danger btn-xs" ng-click="removerAluno(aluno)">
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>
 					</td>
-					<td>{{aluno.nome}}</td>
-					<td>{{aluno.telefone}}</td>
-					<td>{{aluno.email}}</td>
-					<td align="right">
-						<button type="button" class="btn btn-primary btn-xs" ng-click="">
+					<td class="col-md-3 min-caracter">{{aluno.nome}}</td>
+					<td class="col-md-2">{{aluno.telefone}}</td>
+					<td class="col-md-3 min-caracter">{{aluno.email}}</td>
+					<td class="col-md-2" align="right">
+						<button type="button" class="btn btn-primary btn-xs" ng-click="verTreinoAluno(aluno)">
 							<span class="glyphicon glyphicon-eye-open"></span> Treinos
 						</button>
 					</td>

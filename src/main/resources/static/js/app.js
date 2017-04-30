@@ -1,4 +1,4 @@
-var app = angular.module('app',['ui.bootstrap', 'ngRoute']);
+var app = angular.module('app',['ui.bootstrap', 'ngRoute', 'ngAnimate']);
 
 app.config(function($routeProvider){
 	$routeProvider
@@ -17,8 +17,14 @@ app.config(function($routeProvider){
 	}).when('/alunos', {
 		templateUrl : 'view/lista-alunos.html',
 		controller : 'alunoController'
+	}).when('/cadastrar-aluno', {
+		templateUrl : 'view/cadastrar-aluno.html',
+		controller : 'alunoController'
 	}).when('/aluno-treino', {
 		templateUrl : 'view/aluno-treino.html',
+		controller : 'alunoTreinoController'
+	}).when('/cadastrar-aluno-treino', {
+		templateUrl : 'view/cadastrar-aluno-treino.html',
 		controller : 'alunoTreinoController'
 	}).when('/login', {
 		templateUrl : 'view/login.html',
@@ -38,10 +44,24 @@ app.config(function($httpProvider){
 	$httpProvider.interceptors.push('tokenInterceptor');
 });
 
-app.run(function($rootScope){
+app.run(function($rootScope, $location){
 	$rootScope.aluno = {};
 	$rootScope.exercicio = {};
 	$rootScope.treino = {};
 	$rootScope.atividades = [];
 	$rootScope.isLogin = false;
+	$rootScope.somenteLeitura=false;
+	$rootScope.somenteLeituraExercicio=false;
+	
+	var history = [];
+	
+	$rootScope.$on('$routeChangeSuccess', function() {
+        history.push($location.$$path);
+    });
+
+    $rootScope.voltar = function () {
+        var prevUrl = history.length > 1 ? history.splice(-2)[0] : "/";
+        $rootScope.somenteLeituraExercicio = false;
+        $location.path(prevUrl);
+    };
 });

@@ -1,5 +1,6 @@
-app.controller('alunoController', function($scope, $rootScope, $http, config){
-	$scope.aluno={};
+app.controller('alunoController', function($scope, $rootScope, $location, $http, config){
+	
+	$scope.aluno=$rootScope.aluno;
 	$scope.alunos=[];
 	
 	$scope.carregarAlunos = function(){
@@ -10,17 +11,19 @@ app.controller('alunoController', function($scope, $rootScope, $http, config){
 		});
 	};
 	
-	$scope.cadastrarAluno = function(aluno){
+	$scope.salvarAluno = function(aluno){
 		$http({method: 'POST', url: config.baseUrl + '/admin/aluno', data:aluno}).then(function(response){
-			$scope.aluno={};
+			$rootScope.aluno={};
 			$scope.carregarAlunos();
+			$location.path('/alunos');
 		}, function(response){
 			console.log(response);
 		});
 	};
 	
 	$scope.editarAluno = function(aluno){
-		$scope.aluno = aluno;
+		$rootScope.aluno = aluno;
+		$location.path('/cadastrar-aluno');
 	};
 	
 	$scope.removerAluno = function(aluno){
@@ -33,6 +36,17 @@ app.controller('alunoController', function($scope, $rootScope, $http, config){
 	
 	$scope.verTreinoAluno = function(aluno){
 		$rootScope.aluno = aluno;
+		$location.path('/aluno-treino');
+	};
+	
+	$scope.cadastrarAluno = function(){
+		$rootScope.aluno = {};
+		$location.path('/cadastrar-aluno');
+	};
+	
+	$scope.limparAluno = function(){
+		$rootScope.aluno = {};
+		$location.path('/alunos');
 	};
 	
 	$scope.carregarAlunos();	

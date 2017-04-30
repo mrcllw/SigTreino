@@ -1,59 +1,3 @@
-<!-- <h1>Treino</h1> -->
-<!-- <div> -->
-<!-- 	<form> -->
-<!-- 		<div> -->
-<!-- 			<input type="text" placeholder="Nome" ng-model="treino.nome"> -->
-<!-- 		</div> -->
-<!-- 		<div> -->
-<!-- 			<select ng-model="treino.tipo"> -->
-<!-- 				<option disabled selected value="">Selecione o tipo</option> -->
-<!-- 				<option ng-repeat="tipo in tipos" value="{{tipo}}">{{tipo}}</option> -->
-<!-- 			</select> -->
-<!-- 		</div> </br> -->
-<!-- 		<div> -->
-<!-- 			<h3>Atividade</h3> -->
-<!-- 			<div> -->
-<!-- 				<input type="number" placeholder="Serie" ng-model="atividade.serie"> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<input type="number" placeholder="Repeticoes" ng-model="atividade.repeticao"> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<select ng-model="atividade.exercicio" -->
-<!-- 					ng-options="exercicio.nome for exercicio in exercicios track by exercicio.id"> -->
-<!-- 					<option disabled selected value="">Selecione um exercicio.</option> -->
-<!-- 					<option ng-repeat="exercicio in exercicios" value="{{exercicio}}">{{exercicio.nome}}</option> -->
-<!-- 				</select> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<button ng-click="adicionarAtividade(atividade)">Adicionar Atividade</button> -->
-<!-- 			</div> -->
-<!-- 			<div ng-repeat="atividade in atividades track by $index"> -->
-<!-- 				Exercicio: {{atividade.exercicio.nome}} -->
-<!-- 				Serie: {{atividade.serie}} -->
-<!-- 				Repeticoes: {{atividade.repeticao}} -->
-<!-- 				<button ng-click="removerAtividade($index)">Remover Atividade</button> -->
-<!-- 				<button ng-click="editarAtividade(atividade, $index)">Editar Atividade</button> -->
-<!-- 			</div> -->
-<!-- 		</div> </br> -->
-<!-- 		<div> -->
-<!-- 			<button ng-click="salvarTreino(treino)">Salvar Treino</button> -->
-<!-- 		</div> -->
-<!-- 		<div ng-repeat-start="treino in treinos"> -->
-<!-- 			</br> -->
-<!-- 			Nome: {{treino.nome}} -->
-<!-- 			Tipo: {{treino.tipo}} -->
-<!-- 			<button ng-click="removerTreino(treino)">Remover Treino</button> -->
-<!-- 			<button ng-click="editarTreino(treino)">Editar Treino</button> -->
-<!-- 		</div> -->
-<!-- 		<div ng-repeat-end ng-repeat="atividade in treino.atividades"> -->
-<!-- 			Atividade: {{atividade.exercicio.nome}} -->
-<!-- 			Series: {{atividade.serie}} -->
-<!-- 			Repeticoes: {{atividade.repeticao}} -->
-<!-- 		</div> -->
-<!-- 	</form> -->
-<!-- </div> -->
-
 <div class="container">
 	<div class="row">
 		<form>
@@ -63,13 +7,13 @@
 				</div>
 				<div class="col-md-8" align="right">
 					<button type="button" class="btn btn-primary" ng-click="cadastrarTreino()">
-						<span class="glyphicon glyphicon-plus"></span> Adicionar Treino
+						<span class="glyphicon glyphicon-plus"></span> Cadastrar Treino
 					</button>
 				</div>
 			</div>
 		</form>
 	</div>
-	
+	<hr />
 	<div class="table-responsive">
 		<table class="table table-hover table-condensed">
 			<thead>
@@ -77,14 +21,14 @@
 					<th></th>
 					<th>Nome</th>
 					<th>Tipo</th>
-					<th>Exercicios</th>
-					<th>Series</th>
-					<th>Repeticoes</th>
+					<th>Exercícios</th>
+					<th>Séries</th>
+					<th>Repetições</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat-start="treino in treinos | filter:filtroTreino">
-					<td rowspan="{{treino.atividades.length+1}}">
+					<td class="col-md-2" rowspan="{{treino.atividades.length+1}}">
 						<button type="button" class="btn btn-warning btn-xs" ng-click="editarTreino(treino)">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</button>
@@ -92,13 +36,13 @@
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>
 					</td>
-					<td rowspan="{{treino.atividades.length+1}}">{{treino.nome}}</td>
-					<td rowspan="{{treino.atividades.length+1}}">{{treino.tipo}}</td>
+					<td class="col-md-2 min-caracter" rowspan="{{treino.atividades.length+1}}">{{treino.nome}}</td>
+					<td class="col-md-2" rowspan="{{treino.atividades.length+1}}">{{treino.tipo}}</td>
 				</tr>
 				<tr ng-repeat-end ng-repeat="atividade in treino.atividades">
-					<td>{{atividade.exercicio.nome}}</td>
-					<td>{{atividade.serie}}</td>
-					<td>{{atividade.repeticao}}</td>
+					<td class="col-md-2 min-caracter">{{atividade.exercicio.nome}}</td>
+					<td class="col-md-2">{{atividade.serie}}</td>
+					<td class="col-md-2">{{atividade.repeticao}}</td>
 				</tr>
 			</tbody>
 			<tfoot>
