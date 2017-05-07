@@ -1,16 +1,16 @@
 <div class="container">
 	<h1>Cadastro Aluno</h1>
 	<hr />
-	<form>
+	<form name="formCadastrarAluno">
 		<div class="form-group">
 			<div class="row">
 				<div class="col-md-9">
 					<label>Nome</label> 
-					<input ng-model="aluno.nome" class="form-control" placeholder="Nome">
+					<input ng-model="aluno.nome" name="nome" required class="form-control" placeholder="Nome">
 				</div>
 				<div class="form-group col-md-3">
 					<label>CPF</label> 
-					<input ng-model="aluno.CPF" class="form-control" placeholder="CPF"> 
+					<input ng-model="aluno.CPF" name="cpf" required mask="999.999.999-99" class="form-control" placeholder="CPF"> 
 				</div>
 			</div>
 		</div>
@@ -18,15 +18,15 @@
 			<div class="row">
 				<div class="col-md-3">
 					<label>Data de Nascimento</label>
-					<input ng-model="aluno.dataNascimento" class="form-control" placeholder="Data de Nascimento">
+					<input ng-model="aluno.dataNascimento" name="dataNascimento" required mask="99/99/9999" class="form-control" placeholder="Data de Nascimento">
 				</div>
 				<div class="col-md-3">
 					<label>Telefone</label> 
-					<input ng-model="aluno.telefone" class="form-control"  placeholder="Telefone"> 
+					<input ng-model="aluno.telefone" name="telefone" required mask="(99)9?9999-9999" class="form-control"  placeholder="Telefone"> 
 				</div>
 				<div class="col-md-6">
 					<label>Email</label>
-					<input ng-model="aluno.email" class="form-control"  placeholder="Email">
+					<input ng-model="aluno.email" name="email" required class="form-control"  placeholder="Email">
 				</div>
 			</div>
 		</div>
@@ -34,19 +34,19 @@
 			<div class="row">
 				<div class="col-md-2">
 					<label>CEP</label> 
-					<input ng-model="aluno.CEP" class="form-control"  placeholder="CEP">
+					<input ng-model="aluno.cep" name="cep" mask="99999-999" clean="true" ng-change="buscarCep(aluno.cep)" class="form-control"  placeholder="CEP">
 				</div>
 				<div class="col-md-5">
 					<label>Endereço</label> 
-					<input ng-model="aluno.logradouro" class="form-control" placeholder="Endereco">
+					<input ng-model="aluno.logradouro" name="logradouro" required ng-disabled="aluno.cep" class="form-control" placeholder="Endereco">
 				</div>
 				<div class="col-md-3">
 					<label>Bairro</label> 
-					<input ng-model="aluno.bairro" class="form-control" placeholder="Bairro">
+					<input ng-model="aluno.bairro" name="bairro" required ng-disabled="aluno.cep" class="form-control" placeholder="Bairro">
 				</div>
 				<div class="col-md-2">
 					<label>Número</label> 
-					<input ng-model="aluno.numero" class="form-control" placeholder="Numero">
+					<input ng-model="aluno.numero" name="numero" required class="form-control" placeholder="Numero">
 				</div>
 			</div>
 		</div>
@@ -54,20 +54,20 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label>Complemento</label> 
-					<input ng-model="aluno.complemento" class="form-control" placeholder="Complemento">
+					<input ng-model="aluno.complemento" name="complemento" class="form-control" placeholder="Complemento">
 				</div>
 				<div class="col-md-4">
 					<label>Cidade</label> 
-					<input ng-model="aluno.cidade" class="form-control" placeholder="Cidade">
+					<input ng-model="aluno.cidade" name="cidade" required ng-disabled="aluno.cep" class="form-control" placeholder="Cidade">
 				</div>
 				<div class="col-md-2">
 					<label>Estado</label> 
-					<input ng-model="aluno.estado" class="form-control" placeholder="Estado">
+					<input ng-model="aluno.estado" name="estado" required ng-disabled="aluno.cep" class="form-control" placeholder="Estado">
 				</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<button type="button" class="btn btn-primary" ng-click="salvarAluno(aluno)">
+			<button type="button" class="btn btn-success" ng-click="salvarAluno(aluno)" ng-disabled="formCadastrarAluno.$invalid">
 				<span class="glyphicon glyphicon-plus"></span> Salvar
 			</button>
 			<button type="button" class="btn btn-danger" ng-click="limparAluno()">

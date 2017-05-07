@@ -1,12 +1,11 @@
 app.controller('alunoTreinoController', function($scope, $location, $rootScope, $http, config){
 	
 	aluno = $rootScope.aluno;
-	$scope.treinosAluno=[];
 	$scope.treinosCadastro=[];
 	$scope.diasTreino=[];
 	$scope.diasSelecionados=[];
 	$scope.alunoTreino={};
-
+	
 	$scope.carregarTreinosAluno = function(){
 		$http({method: 'GET', url: config.baseUrl + '/admin/aluno/treino/' + aluno.id}).then(function(response){
 			$scope.treinosAluno = response.data;			
@@ -29,10 +28,6 @@ app.controller('alunoTreinoController', function($scope, $location, $rootScope, 
 		}, function(response){
 			console.log(response);
 		});
-	};
-	
-	$scope.definirAjustar = function(){
-		$location.path('/cadastrar-aluno-treino');
 	};
 	
 	$scope.diaChecked = function(dia){
@@ -78,10 +73,6 @@ app.controller('alunoTreinoController', function($scope, $location, $rootScope, 
 		$rootScope.somenteLeitura = true;
 	};
 	
-	$scope.carregarTreinosAluno();
-	$scope.carregarTreinosCadastro();
-	$scope.carregarDiasTreino();
-	
 	$scope.treinosDia = function(treino, dia){
 		for(var i = 0; i < treino.dias.length; i++){
 			if(treino.dias[i].toLowerCase() == dia.toLowerCase()){
@@ -89,5 +80,8 @@ app.controller('alunoTreinoController', function($scope, $location, $rootScope, 
 			};
 		};
 	};
-
+	
+	$scope.carregarTreinosAluno();
+	$scope.carregarTreinosCadastro();
+	$scope.carregarDiasTreino();
 });

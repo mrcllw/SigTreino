@@ -1,8 +1,10 @@
-var app = angular.module('app',['ui.bootstrap', 'ngRoute', 'ngAnimate']);
+var app = angular.module('app',['ui.bootstrap', 'ngRoute', 'ngAnimate', 'ngMask']);
 
 app.config(function($routeProvider){
 	$routeProvider
-	.when('/exercicios', {
+	.when('/', {
+		templateUrl : 'view/inicio.html'
+	}).when('/exercicios', {
 		templateUrl : 'view/lista-exercicios.html',
 		controller : 'exercicioController'
 	}).when('/cadastrar-exercicio', {
@@ -20,9 +22,6 @@ app.config(function($routeProvider){
 	}).when('/cadastrar-aluno', {
 		templateUrl : 'view/cadastrar-aluno.html',
 		controller : 'alunoController'
-	}).when('/aluno-treino', {
-		templateUrl : 'view/aluno-treino.html',
-		controller : 'alunoTreinoController'
 	}).when('/cadastrar-aluno-treino', {
 		templateUrl : 'view/cadastrar-aluno-treino.html',
 		controller : 'alunoTreinoController'
@@ -30,7 +29,7 @@ app.config(function($routeProvider){
 		templateUrl : 'view/login.html',
 		controller : 'loginController'
 	}).when('/academia', {
-		templateUrl : 'view/academia.html',
+		templateUrl : 'view/cadastrar-academia.html',
 		controller : 'academiaController'
 	})
 	.otherwise({redirectTo : '/'});

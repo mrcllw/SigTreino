@@ -1,17 +1,17 @@
 <div class="container">
-	<h1 ng-if="!$root.somenteLeituraExercicio">Cadastro Exerc�cio</h1>
+	<h1 ng-if="!$root.somenteLeituraExercicio">Cadastro Exercício</h1>
 	<h1 ng-if="$root.somenteLeituraExercicio">Exercicio</h1>
 	<hr />
-	<form>
+	<form name="formCadastroExercicio">
 		<div class="form-group">
 			<div class="row">
 				<div class="col-md-8">
 					<label>Nome</label>
-					<input type="text" class="form-control" placeholder="Nome" ng-model="exercicio.nome" maxlength="80" ng-readonly="$root.somenteLeituraExercicio">
+					<input type="text" name="nome" class="form-control" placeholder="Nome" ng-model="exercicio.nome" maxlength="80" ng-readonly="$root.somenteLeituraExercicio" required>
 				</div>
 				<div class="col-md-4">	
-	    			<label>Grupo Muscular:</label>
-	    			<select class="form-control" ng-model="exercicio.grupamento" ng-disabled="$root.somenteLeituraExercicio">
+	    			<label>Grupo Muscular</label>
+	    			<select class="form-control" name="grupamento" ng-model="exercicio.grupamento" ng-disabled="$root.somenteLeituraExercicio" required>
 	    				<option selected disabled value="">Selecione um grupo</option>
 	      				<option ng-repeat="grupo in grupamentos" value="{{grupo}}">{{grupo}}</option>
 	    			</select>
@@ -20,14 +20,14 @@
   		</div>
 
   		<div class="form-group">
-    		<label>Descricao:</label>
-    		<textarea class="form-control" rows="5" ng-model="exercicio.descricao" placeholder="Descricao" maxlength="300" ng-readonly="$root.somenteLeituraExercicio"></textarea>
+    		<label>Descrição</label>
+    		<textarea class="form-control" name="descricao" rows="5" ng-model="exercicio.descricao" placeholder="Descricao" maxlength="300" ng-readonly="$root.somenteLeituraExercicio" required></textarea>
   		</div>
   		<div class="form-group">
   			<button type="button" class="btn btn-default" ng-click="voltar()" ng-if="$root.somenteLeituraExercicio">
   				<span class="glyphicon glyphicon-chevron-left"></span> Voltar
   			</button>
-  			<button type="button" class="btn btn-primary" ng-click="salvarExercicio(exercicio)" ng-show="!$root.somenteLeituraExercicio">
+  			<button type="button" class="btn btn-success" ng-click="salvarExercicio(exercicio)" ng-show="!$root.somenteLeituraExercicio" ng-disabled="formCadastroExercicio.$invalid">
   				<span class="glyphicon glyphicon-plus"></span> Salvar
   			</button>
   			<button type="button" class="btn btn-danger" ng-click="limparExercicio()" ng-show="!$root.somenteLeituraExercicio">

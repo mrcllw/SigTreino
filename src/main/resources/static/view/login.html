@@ -1,4 +1,31 @@
-<h1>Login</h1>
-<input type="text" placeholder="Login" ng-model="academia.login">
-<input type="password" placeholder="Senha" ng-model="academia.senha">
-<button ng-click="autenticar(academia)">OK</button>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1>Login</h1>
+			<hr />
+		</div>
+		
+		<form name="formLogin">
+			<div class="col-md-12 col-lg-offset-4">
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label>Usuario</label>
+					 	<input type="text" class="form-control" ng-model="academia.login" placeholder="Digite o login" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label>Senha</label>
+						<input type="password" class="form-control" placeholder="Digite a senha" ng-model="academia.senha" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-4">
+						<button id="btnLogin" type="button" class="btn btn-primary" ng-click="autenticar(academia)" ng-disabled="formLogin.$invalid">Conectar</button>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+</div>

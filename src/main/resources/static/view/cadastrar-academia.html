@@ -1,0 +1,169 @@
+<div class="container">
+	<h1>Cadastro Aluno</h1>
+	<hr />
+	<form name="formCadastroAcademia">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<div class="radio-inline">
+						<label>
+							<input type="radio" name="tipo" ng-model="tipo" value="fisica" ng-change="limparAcademia()"> Pessoa Física
+						</label>
+					</div>
+					<div class="radio-inline">
+						<label>
+							<input type="radio" name="tipo" ng-model="tipo" value="juridica" ng-change="limparAcademia()"> Pessoa Jurídica
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<div class="row" ng-show="tipo == 'fisica'">
+						<div class="col-md-6">
+							<label>CPF</label>
+							<input class="form-control" name="cpfCnpj" type="text" placeholder="Digite o CPF" ng-model="academia.cpfCnpj" mask="999.999.999-99" clean="true" ng-change="buscarCpf(academia.cpfCnpj)" required>
+						</div>
+						<div class="col-md-6">
+							<label>Data de Nascimento</label>
+							<input class="form-control" name="dataAberturaNascimento" type="text" placeholder="Digite a data de nascimento" ng-model="academia.dataAberturaNascimento" mask="99/99/9999" required>
+						</div>
+					</div>
+					<div class="row" ng-show="tipo == 'juridica'">
+						<div class="col-md-6">
+							<label>CNPJ</label>
+							<input class="form-control" name="cpfCnpj" type="text" placeholder="Digite o CNPJ" ng-model="academia.cpfCnpj" mask="99.999.999/9999-99" clean="true" ng-change="buscarCnpj(academia.cpfCnpj)" required>
+						</div>
+						<div class="col-md-6">
+							<label>Data de Abertura</label>
+							<input class="form-control" name="dataAberturaNascimento" type="text" placeholder="Digite a data de abertura" ng-model="academia.dataAberturaNascimento" mask="99/99/9999" ng-disabled="academia.cpfCnpj.length == 14 && tipo == 'juridica'">
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row" ng-show="tipo == 'fisica'">
+						<div class="col-md-12">
+							<label>Nome Proprietário</label>
+							<input class="form-control" name="razaoSocialNomeEmpresario" type="text" placeholder="Digite o nome" ng-model="academia.razaoSocialNomeEmpresario" required>
+						</div>
+					</div>
+					<div class="row" ng-show="tipo == 'juridica'">
+						<div class="col-md-12">
+							<label>Razão Social</label>
+							<input class="form-control" name="razaoSocialNomeEmpresario" type="text" placeholder="Digite a razao social" ng-model="academia.razaoSocialNomeEmpresario" ng-disabled="academia.cpfCnpj.length == 14 && tipo == 'juridica'" required>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row" ng-show="tipo == 'fisica'">
+						<div class="col-md-12">
+							<label>Nome da Academia</label>
+							<input class="form-control" name="nomeFantasiaEmpresarial" type="text" placeholder="Digite o nome da academia" ng-model="academia.nomeFantasiaEmpresarial" required>
+						</div>
+					</div>
+					<div class="row" ng-show="tipo == 'juridica'">
+						<div class="col-md-12">
+							<label>Nome Fantasia</label>
+							<input class="form-control" name="nomeFantasiaEmpresarial" type="text" placeholder="Digite o nome fantasia" ng-model="academia.nomeFantasiaEmpresarial" ng-disabled="academia.cpfCnpj.length == 14 && tipo == 'juridica'" required>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-6">
+							<label>E-mail</label>
+							<input class="form-control" name="email" type="text" placeholder="Digite o e-mail" ng-model="academia.email" required>
+						</div>
+						<div class="col-md-6">
+							<label>Telefone</label>
+							<input class="form-control" name="telefone" type="text" placeholder="Digite o telefone" ng-model="academia.telefone" mask="(99)9?9999-9999" required>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-6">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-6">
+							<label>CEP</label>
+							<input class="form-control" name="cep" type="text" placeholder="Digite o CEP" ng-model="academia.cep" mask="99999-999" clean="true" ng-disabled="academia.cpfCnpj.length == 14 && tipo == 'juridica'" ng-change="buscarCep(academia.cep)">
+						</div>
+						<div class="col-md-6">
+							<label>Numero</label>
+							<input class="form-control" name="numero" type="text" placeholder="Digite o numero" ng-model="academia.numero" ng-disabled="academia.cpfCnpj.length == 14 && tipo == 'juridica'" required>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-12">
+							<label>Endereço</label>
+							<input class="form-control" name="logradouro" type="text" placeholder="Digite o endereço" ng-model="academia.logradouro" ng-disabled="academia.cep || academia.cpfCnpj.length == 14 && tipo == 'juridica'" required>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Bairro</label>
+							<input class="form-control" name="bairro" type="text" placeholder="Digite o bairro" ng-model="academia.bairro" ng-disabled="academia.cep || academia.cpfCnpj.length == 14 && tipo == 'juridica'" required>
+						</div>
+						<div class="col-md-6">
+							<label>Complemento</label>
+							<input class="form-control" name="complemento" type="text" placeholder="Digite o complemento" ng-model="academia.complemento">
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-9">
+							<label>Cidade</label>
+							<input class="form-control" name="cidade" type="text" placeholder="Digite a Cidade" ng-model="academia.cidade" ng-disabled="academia.cep || academia.cpfCnpj.length == 14 && tipo == 'juridica'" required>
+						</div>
+						<div class="col-md-3">
+							<label>Estado</label>
+							<input class="form-control" name="estado" type="text" placeholder="Digite o estado" ng-model="academia.estado" ng-disabled="academia.cep || academia.cpfCnpj.length == 14 && tipo == 'juridica'" required>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<hr />
+		
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Login</label>
+							<input class="form-control" name="login" type="text" placeholder="Digite o login" ng-model="academia.login" required>
+						</div>
+						<div class="col-md-6">
+							<label>Senha</label>
+							<input class="form-control" name="senha" type="password" placeholder="Digite a senha" ng-model="academia.senha" required>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<button type="button" class="btn btn-primary" ng-click="cadastrarAcademia(academia)" ng-disabled="formCadastroAcademia.$invalid">
+			<span class="glyphicon glyphicon-plus"></span> Cadastrar
+		</button>
+		
+		<button type="button" class="btn btn-danger" ng-click="cancelarCadastro()">
+			<span class="glyphicon glyphicon-remove"></span> Cancelar
+		</button>
+		
+	</form>
+</div>

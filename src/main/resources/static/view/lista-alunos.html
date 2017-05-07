@@ -25,8 +25,8 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr ng-repeat="aluno in alunos | filter:filtroAluno">
+			<tbody ng-repeat="(index, aluno) in alunos | filter:filtroAluno">
+				<tr>
 					<td class="col-md-2">
 						<button type="button" class="btn btn-warning btn-xs" ng-click="editarAluno(aluno)">
 							<span class="glyphicon glyphicon-pencil"></span>
@@ -39,11 +39,83 @@
 					<td class="col-md-2">{{aluno.telefone}}</td>
 					<td class="col-md-3 min-caracter">{{aluno.email}}</td>
 					<td class="col-md-2" align="right">
-						<button type="button" class="btn btn-primary btn-xs" ng-click="verTreinoAluno(aluno)">
+						<button type="button" class="btn btn-primary btn-xs" ng-click="verTreinoAluno(index, aluno)">
 							<span class="glyphicon glyphicon-eye-open"></span> Treinos
 						</button>
 					</td>
 				</tr>
+				
+				<tr ng-show="verCalendarioTreino(index)">
+					<td colspan="5">
+						<table class="table table-hover table-bordered table-condensed">
+							<thead>
+								<th>Segunda</th>
+								<th>Terça</th>
+								<th>Quarta</th>
+								<th>Quinta</th>
+								<th>Sexta</th>
+								<th>Sabado</th>
+								<th>Domingo</th>
+							</thead>
+							<tbody>
+								<td>
+									<ul>
+										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Segunda');">
+											{{treino.treino.nome}}
+										</li>
+									</ul>
+								</td>
+								<td>
+									<ul>
+										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Terça');">
+											{{treino.treino.nome}}
+										</li>
+									</ul>
+								</td><td>
+									<ul>
+										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Quarta');">
+											{{treino.treino.nome}}
+										</li>
+									</ul>
+								</td><td>
+									<ul>
+										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Quinta');">
+											{{treino.treino.nome}}
+										</li>
+									</ul>
+								</td><td>
+									<ul>
+										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Sexta');">
+											{{treino.treino.nome}}
+										</li>
+									</ul>
+								</td><td>
+									<ul>
+										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Sabádo');">
+											{{treino.treino.nome}}
+										</li>
+									</ul>
+								</td><td>
+									<ul>
+										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Domingo');">
+											{{treino.treino.nome}}
+										</li>
+									</ul>
+								</td>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="7">
+										<button type="button" class="btn btn-primary btn-xs" ng-click="definirAjustar()">
+											<span class="glyphicon glyphicon-edit"></span> Definir/Ajustar
+										</button>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</td>
+				</tr>
+				
 			</tbody>
 			<tfoot>
 				<tr>
