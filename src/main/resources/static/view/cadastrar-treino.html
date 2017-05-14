@@ -28,26 +28,44 @@
 		  			<div class="row">
 			  			<div class="col-md-7">
 			  				<label>Exercício</label>
-			  				<select class="form-control" name="exercicio" required ng-model="atividade.exercicio"
+			  				<select class="form-control" name="exercicio" required ng-model="atividade.exercicio" ng-click="limparCampos()"
 			  						ng-options="exercicio.nome for exercicio in exercicios track by exercicio.id">
 			  					<option selected disabled value="">Selecione um exercício</option>
 			  				</select>
 			  			</div>
-			  			<div class="col-md-2">
-			  				<label>Séries</label>
-			  				<input type="number" name="serie" required mask="9?9" class="form-control" placeholder="Series" ng-model="atividade.serie">
-			  			</div>
-			  			<div class="col-md-3">
-			  				<label>Repetições</label>
-			  				<div class="input-group">
-				  				<input type="number" name="repeticao" required mask="9?9" class="form-control" placeholder="Repeticoes" ng-model="atividade.repeticao">
-				  				<span class="input-group-btn">
-				  					<button type="button" class="btn btn-success" ng-click="adicionarAtividade(atividade)" ng-disabled="formCadastrarAtividade.$invalid">
-				  						<span class="glyphicon glyphicon-plus"></span>
-				  					</button>
-				  				</span>
+			  			
+			  			<div ng-if="atividade.exercicio.atividadeFisica == 'Musculação'">
+				  			<div class="col-md-2">
+				  				<label>Séries</label>
+				  				<input type="text" name="serie" ng-required="atividade.exercicio.atividadeFisica == 'Musculação'" mask="9?9" class="form-control" placeholder="Series" ng-model="atividade.serie">
 				  			</div>
-			  			</div>
+				  			<div class="col-md-3">
+				  				<label>Repetições</label>
+				  				<div class="input-group">
+					  				<input type="text" name="repeticao" ng-required="atividade.exercicio.atividadeFisica == 'Musculação'" mask="9?9" class="form-control" placeholder="Repeticoes" ng-model="atividade.repeticao">
+					  				<span class="input-group-btn">
+					  					<button type="button" class="btn btn-success" ng-click="adicionarAtividade(atividade)" ng-disabled="formCadastrarAtividade.$invalid">
+					  						<span class="glyphicon glyphicon-plus"></span>
+					  					</button>
+					  				</span>
+					  			</div>
+				  			</div>
+				  		</div>
+				  		
+				  		<div ng-if="atividade.exercicio.atividadeFisica == 'Aeróbico' || atividade.exercicio.atividadeFisica == 'Artes_Marciais'">
+				  			<div class="col-md-5">
+				  				<label>Tempo(Minutos)</label>
+				  				<div class="input-group">
+					  				<input type="text" name="tempo" ng-required="atividade.exercicio.atividadeFisica == 'Aeróbico' || atividade.exercicio.atividadeFisica == 'Artes_Marciais'" mask="9?9?9" class="form-control" placeholder="Tempo(Minutos)" ng-model="atividade.tempo">
+					  				<span class="input-group-btn">
+					  					<button type="button" class="btn btn-success" ng-click="adicionarAtividade(atividade)" ng-disabled="formCadastrarAtividade.$invalid">
+					  						<span class="glyphicon glyphicon-plus"></span>
+					  					</button>
+					  				</span>
+					  			</div>
+				  			</div>
+				  		</div>
+				  		
 			  		</div>
 		  		</div>
   		
@@ -57,8 +75,8 @@
 							<tr>
 								<th></th>
 								<th>Exercícios</th>
-								<th>Séries</th>
-								<th>Repetições</th>
+								<th>Séries/Repetições</th>
+								<th>Tempo(Minutos)</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -75,8 +93,8 @@
 									</button>
 								</td>
 								<td class="col-md-3">{{atividade.exercicio.nome}}</td>
-								<td class="col-md-3">{{atividade.serie}}</td>
-								<td class="col-md-3">{{atividade.repeticao}}</td>
+								<td class="col-md-3">{{mostrarSerieRepeticao(atividade.serie, atividade.repeticao)}}</td>
+								<td class="col-md-3">{{mostrarTempo(atividade.tempo)}}</td>
 							</tr>
 						</tbody>
 						<tfoot>
@@ -93,7 +111,7 @@
   			<button type="button" class="btn btn-default" ng-click="voltar()" ng-if="$root.somenteLeitura">
   				<span class="glyphicon glyphicon-chevron-left"></span> Voltar
   			</button>
-  			<button type="button" class="btn btn-success" ng-click="salvarTreino(treino)" ng-if="!$root.somenteLeitura" ng-disabled="formCadastrarTreino.$invalid">
+  			<button type="button" class="btn btn-success" ng-click="salvarTreino(treino)" ng-if="!$root.somenteLeitura" ng-disabled="formCadastrarTreino.$invalid && formCadastrarAtividade.$invalid">
   				<span class="glyphicon glyphicon-plus"></span> Salvar
   			</button>
   			<button type="button" class="btn btn-danger" ng-click="limparTreino()" ng-if="!$root.somenteLeitura">

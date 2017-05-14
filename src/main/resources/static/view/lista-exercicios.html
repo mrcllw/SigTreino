@@ -21,12 +21,13 @@
 					<th></th>
 					<th>Nome</th>
 					<th>Descrição</th>
+					<th>Atividade</th>
 					<th>Grupo Muscular</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="exercicio in exercicios | filter:filtroGrupoMuscular">
-					<td class="col-md-3">
+					<td class="col-md-2">
 						<button type="button" class="btn btn-warning btn-xs" ng-click="editarExercicio(exercicio)">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</button>
@@ -39,12 +40,13 @@
 					</td>
 					<td class="col-md-3 min-caracter">{{exercicio.nome}}</td>
 					<td class="col-md-3 min-caracter">{{exercicio.descricao}}</td>
-					<td class="col-md-3">{{exercicio.grupamento}}</td>
+					<td class="col-md-2">{{exercicio.atividadeFisica.replace('_', ' ')}}</td>
+					<td class="col-md-2">{{exercicio.grupamento}}</td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="4">Exercícios Cadatrados: {{exercicios.length}}</td>
+					<td colspan="5">Exercícios Cadatrados: {{exercicios.length}}</td>
 				</tr>
 			</tfoot>
 		</table>

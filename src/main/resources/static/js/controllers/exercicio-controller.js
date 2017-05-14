@@ -2,6 +2,16 @@ app.controller('exercicioController', function($scope, $rootScope, $http, $locat
 	$scope.exercicio = $rootScope.exercicio;
 	$scope.exercicios=[];
 	$scope.grupamentos = [];
+
+	$scope.atividadesFisica = [];
+	
+	$scope.carregarAtividadesFisica = function(){
+		$http({method: 'GET', url: 'http://localhost:6123/atividade-fisica'}).then(function(response){
+			$scope.atividadesFisica = response.data;
+		}, function(response){
+			console.log(response);
+		});
+	};
 	
 	$scope.carregarGruposMuscular = function(){
 		$http({method: 'GET', url: 'http://localhost:6123/grupo-muscular'}).then(function(response){
@@ -59,7 +69,20 @@ app.controller('exercicioController', function($scope, $rootScope, $http, $locat
 		$location.path('/cadastrar-exercicio');
 	};
 	
+	$scope.grupoMuscularOff = function(){
+		var atividadeFisica = document.querySelector('#atividade');
+		if(atividadeFisica.value == 'Aeróbico' || atividadeFisica.value == 'Artes_Marciais'){
+			$scope.exercicio.grupamento = 'Todos';
+			return true;
+		} else if($rootScope.somenteLeituraExercicio){
+			return true;
+		} else {
+			return false;
+		}
+	};
+	
 	$scope.carregarGruposMuscular();
 	$scope.carregarExercicios();
+	$scope.carregarAtividadesFisica();
 	
 });

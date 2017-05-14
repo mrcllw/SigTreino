@@ -60,7 +60,23 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 		$rootScope.treino = {};
 		$rootScope.atividades = [];
 		$location.path('/treinos');
-	}
+	};
+	
+	$scope.mostrarTempo = function(tempo){
+		if(tempo == '' || tempo == null){
+			return '';
+		} else {
+			return tempo;
+		};
+	};
+	
+	$scope.mostrarSerieRepeticao = function(serie, repeticao){
+		if(serie == null && repeticao == null || serie == '' && repeticao == ''){
+			return '';
+		} else {
+			return serie + ' x ' + repeticao;
+		};
+	};
 	
 	$scope.carregarTipoTreino();
 	$scope.carregarTreinos();
@@ -106,6 +122,12 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 		$rootScope.exercicio = exercicio;
 		$rootScope.somenteLeituraExercicio = true;
 		$location.path('/cadastrar-exercicio');
+	};
+	
+	$scope.limparCampos = function(){
+		$scope.atividade.serie = '';
+		$scope.atividade.repeticao = '';
+		$scope.atividade.tempo = '';
 	};
 	
 	$scope.carregarExercicios();

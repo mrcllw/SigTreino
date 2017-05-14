@@ -22,8 +22,8 @@
 					<th>Nome</th>
 					<th>Tipo</th>
 					<th>Exercícios</th>
-					<th>Séries</th>
-					<th>Repetições</th>
+					<th>Séries/Repetições</th>
+					<th>Tempo(Minutos)</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,8 +41,8 @@
 				</tr>
 				<tr ng-repeat-end ng-repeat="atividade in treino.atividades">
 					<td class="col-md-2 min-caracter">{{atividade.exercicio.nome}}</td>
-					<td class="col-md-2">{{atividade.serie}}</td>
-					<td class="col-md-2">{{atividade.repeticao}}</td>
+					<td class="col-md-2">{{mostrarSerieRepeticao(atividade.serie, atividade.repeticao)}}</td>
+					<td class="col-md-2">{{mostrarTempo(atividade.tempo)}}</td>
 				</tr>
 			</tbody>
 			<tfoot>

@@ -45,6 +45,7 @@ app.controller('alunoTreinoController', function($scope, $location, $rootScope, 
 		alunoTreino.dias = $scope.diasSelecionados;
 		$http({method: 'POST', url: config.baseUrl + '/admin/aluno/treino', data:alunoTreino}).then(function(response){
 			$scope.carregarTreinosAluno();
+			$scope.alunoTreino={};
 			$scope.alunoTreino.treino = {};
 			$scope.diasSelecionados = [];
 		}, function(response){
