@@ -35,9 +35,9 @@
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>
 					</td>
-					<td class="col-md-3 min-caracter">{{aluno.nome}}</td>
+					<td class="col-md-3 min-caracter">{{aluno.nome | cut:true:25}}</td>
 					<td class="col-md-2">{{aluno.telefone}}</td>
-					<td class="col-md-3 min-caracter">{{aluno.email}}</td>
+					<td class="col-md-3 min-caracter">{{aluno.email | cut:true:15}}</td>
 					<td class="col-md-2" align="right">
 						<button type="button" class="btn btn-primary btn-xs" ng-click="verTreinoAluno(index, aluno)">
 							<span class="glyphicon glyphicon-eye-open"></span> Treinos
@@ -61,44 +61,44 @@
 								<td>
 									<ul>
 										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Segunda');">
-											{{treino.treino.nome}}
+											{{treino.treino.nome | cut:true:15}}
 										</li>
 									</ul>
 								</td>
 								<td>
 									<ul>
 										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Terça');">
-											{{treino.treino.nome}}
+											{{treino.treino.nome | cut:true:15}}
 										</li>
 									</ul>
 								</td><td>
 									<ul>
 										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Quarta');">
-											{{treino.treino.nome}}
+											{{treino.treino.nome | cut:true:15}}
 										</li>
 									</ul>
 								</td><td>
 									<ul>
 										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Quinta');">
-											{{treino.treino.nome}}
+											{{treino.treino.nome | cut:true:15}}
 										</li>
 									</ul>
 								</td><td>
 									<ul>
 										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Sexta');">
-											{{treino.treino.nome}}
+											{{treino.treino.nome | cut:true:15}}
 										</li>
 									</ul>
 								</td><td>
 									<ul>
 										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Sábado');">
-											{{treino.treino.nome}}
+											{{treino.treino.nome | cut:true:15}}
 										</li>
 									</ul>
 								</td><td>
 									<ul>
 										<li ng-repeat="treino in treinosAluno" ng-show="treinosDia(treino, 'Domingo');">
-											{{treino.treino.nome}}
+											{{treino.treino.nome | cut:true:15}}
 										</li>
 									</ul>
 								</td>

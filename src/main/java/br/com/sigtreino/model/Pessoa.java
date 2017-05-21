@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Pessoa {
 	
@@ -14,6 +16,7 @@ public class Pessoa {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String cpfCnpj;
+	@JsonFormat(pattern="dd/MM/yyyy", locale="pt-BR", timezone="America/Campo_Grande")
 	private Date dataAberturaNascimento;
 	private Integer cep;
 	private String logradouro;	

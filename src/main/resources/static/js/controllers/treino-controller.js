@@ -116,6 +116,7 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 		$scope.atividade = angular.copy(atividade);
 		isEdit = true;
 		isEditIndex = index;
+		verificaCampoExercicioAtividade();
 	};
 	
 	$scope.detalhesExercicio = function(exercicio){
@@ -124,10 +125,27 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 		$location.path('/cadastrar-exercicio');
 	};
 	
+	$scope.mostrarDetalhesMusculacao = false;
+	$scope.mostrarDetalhesOutros = false;
+	
 	$scope.limparCampos = function(){
 		$scope.atividade.serie = '';
 		$scope.atividade.repeticao = '';
 		$scope.atividade.tempo = '';
+		
+		verificaCampoExercicioAtividade();
+	};
+	
+	 function verificaCampoExercicioAtividade(){
+		if ($scope.atividade.exercicio == undefined){
+			return;
+		} else if ($scope.atividade.exercicio.atividadeFisica == 'Musculação'){
+			$scope.mostrarDetalhesMusculacao = true;
+			$scope.mostrarDetalhesOutros = false;
+		} else if ($scope.atividade.exercicio.atividadeFisica == 'Aeróbico' || $scope.atividade.exercicio.atividadeFisica == 'Artes_Marciais'){
+			$scope.mostrarDetalhesMusculacao = false;
+			$scope.mostrarDetalhesOutros = true;
+		};
 	};
 	
 	$scope.carregarExercicios();

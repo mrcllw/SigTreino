@@ -2,7 +2,6 @@ app.controller('exercicioController', function($scope, $rootScope, $http, $locat
 	$scope.exercicio = $rootScope.exercicio;
 	$scope.exercicios=[];
 	$scope.grupamentos = [];
-
 	$scope.atividadesFisica = [];
 	
 	$scope.carregarAtividadesFisica = function(){

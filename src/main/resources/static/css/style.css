@@ -1,0 +1,21 @@
+@font-face {
+    font-family: Poppins;
+    src: url(../font/Poppins-Regular.ttf);
+}
+
+body {
+	font-family: Poppins;
+	padding-top: 70px;
+}
+
+ul{
+	list-style-type: none;
+	padding: 0;
+}
+
+.inicio {
+	background: url(../img/gym.jpg);
+	background-size: cover;
+	height: 100vh;
+	margin-top:-39px;
+}

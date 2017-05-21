@@ -34,15 +34,15 @@
 			  				</select>
 			  			</div>
 			  			
-			  			<div ng-if="atividade.exercicio.atividadeFisica == 'Musculação'">
+			  			<div ng-if="mostrarDetalhesMusculacao">
 				  			<div class="col-md-2">
 				  				<label>Séries</label>
-				  				<input type="text" name="serie" ng-required="atividade.exercicio.atividadeFisica == 'Musculação'" mask="9?9" class="form-control" placeholder="Series" ng-model="atividade.serie">
+				  				<input type="text" name="serie" ng-required="mostrarDetalhesMusculacao" mask="9?9" class="form-control" placeholder="Series" ng-model="atividade.serie">
 				  			</div>
 				  			<div class="col-md-3">
 				  				<label>Repetições</label>
 				  				<div class="input-group">
-					  				<input type="text" name="repeticao" ng-required="atividade.exercicio.atividadeFisica == 'Musculação'" mask="9?9" class="form-control" placeholder="Repeticoes" ng-model="atividade.repeticao">
+					  				<input type="text" name="repeticao" ng-required="mostrarDetalhesMusculacao" mask="9?9" class="form-control" placeholder="Repeticoes" ng-model="atividade.repeticao">
 					  				<span class="input-group-btn">
 					  					<button type="button" class="btn btn-success" ng-click="adicionarAtividade(atividade)" ng-disabled="formCadastrarAtividade.$invalid">
 					  						<span class="glyphicon glyphicon-plus"></span>
@@ -52,11 +52,11 @@
 				  			</div>
 				  		</div>
 				  		
-				  		<div ng-if="atividade.exercicio.atividadeFisica == 'Aeróbico' || atividade.exercicio.atividadeFisica == 'Artes_Marciais'">
+				  		<div ng-if="mostrarDetalhesOutros">
 				  			<div class="col-md-5">
 				  				<label>Tempo(Minutos)</label>
 				  				<div class="input-group">
-					  				<input type="text" name="tempo" ng-required="atividade.exercicio.atividadeFisica == 'Aeróbico' || atividade.exercicio.atividadeFisica == 'Artes_Marciais'" mask="9?9?9" class="form-control" placeholder="Tempo(Minutos)" ng-model="atividade.tempo">
+					  				<input type="text" name="tempo" ng-required="mostrarDetalhesOutros" mask="9?9?9" class="form-control" placeholder="Tempo(Minutos)" ng-model="atividade.tempo">
 					  				<span class="input-group-btn">
 					  					<button type="button" class="btn btn-success" ng-click="adicionarAtividade(atividade)" ng-disabled="formCadastrarAtividade.$invalid">
 					  						<span class="glyphicon glyphicon-plus"></span>
@@ -92,7 +92,7 @@
 										<span class="glyphicon glyphicon-eye-open"></span>
 									</button>
 								</td>
-								<td class="col-md-3">{{atividade.exercicio.nome}}</td>
+								<td class="col-md-3">{{atividade.exercicio.nome  | cut:true:15}}</td>
 								<td class="col-md-3">{{mostrarSerieRepeticao(atividade.serie, atividade.repeticao)}}</td>
 								<td class="col-md-3">{{mostrarTempo(atividade.tempo)}}</td>
 							</tr>

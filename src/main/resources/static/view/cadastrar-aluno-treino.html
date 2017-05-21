@@ -7,7 +7,7 @@
 				<div class="col-md-4">
 					<label>Treino</label>
 					<select class="form-control" name="treino" required ng-model="alunoTreino.treino"
-							ng-options="treino.nome for treino in treinosCadastro track by treino.id">
+							ng-options="(treino.nome | cut:true:25) for treino in treinosCadastro track by treino.id">
 						<option disabled selected value="">Selecione um treino.</option>
 					</select>
 				</div>
@@ -54,7 +54,7 @@
 							<span class="glyphicon glyphicon-eye-open"></span>
 						</button>
 					</td>
-					<td rowspan="{{treino.dias.length+1}}">{{treino.treino.nome}}</td>
+					<td rowspan="{{treino.dias.length+1}}">{{treino.treino.nome | cut:true:15}}</td>
 					<td rowspan="{{treino.dias.length+1}}">{{treino.treino.tipo}}</td>
 				</tr>
 				<tr ng-repeat-end ng-repeat="dia in treino.dias">

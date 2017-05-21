@@ -9,5 +9,7 @@ import br.com.sigtreino.model.Academia;
 public interface AcademiaRepository extends JpaRepository<Academia, Long>{
 	
 	public Academia findByLogin(String login);
+	
+	public Academia findByCpfCnpj(String cpfCnpj);
 
 }

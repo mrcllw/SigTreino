@@ -36,11 +36,11 @@
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>
 					</td>
-					<td class="col-md-2 min-caracter" rowspan="{{treino.atividades.length+1}}">{{treino.nome}}</td>
+					<td class="col-md-2" rowspan="{{treino.atividades.length+1}}">{{treino.nome | cut:true:15}}</td>
 					<td class="col-md-2" rowspan="{{treino.atividades.length+1}}">{{treino.tipo}}</td>
 				</tr>
 				<tr ng-repeat-end ng-repeat="atividade in treino.atividades">
-					<td class="col-md-2 min-caracter">{{atividade.exercicio.nome}}</td>
+					<td class="col-md-2">{{atividade.exercicio.nome | cut:true:15}}</td>
 					<td class="col-md-2">{{mostrarSerieRepeticao(atividade.serie, atividade.repeticao)}}</td>
 					<td class="col-md-2">{{mostrarTempo(atividade.tempo)}}</td>
 				</tr>
