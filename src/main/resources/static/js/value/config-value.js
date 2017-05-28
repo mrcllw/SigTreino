@@ -1,3 +1,3 @@
 app.value("config",{
-	baseUrl: "http://localhost:6123"
+	baseUrl: "http://localhost:8080"
 });

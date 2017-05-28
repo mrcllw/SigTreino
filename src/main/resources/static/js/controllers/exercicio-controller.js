@@ -5,7 +5,7 @@ app.controller('exercicioController', function($scope, $rootScope, $http, $locat
 	$scope.atividadesFisica = [];
 	
 	$scope.carregarAtividadesFisica = function(){
-		$http({method: 'GET', url: 'http://localhost:6123/atividade-fisica'}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl + '/atividade-fisica'}).then(function(response){
 			$scope.atividadesFisica = response.data;
 		}, function(response){
 			console.log(response);
@@ -13,7 +13,7 @@ app.controller('exercicioController', function($scope, $rootScope, $http, $locat
 	};
 	
 	$scope.carregarGruposMuscular = function(){
-		$http({method: 'GET', url: 'http://localhost:6123/grupo-muscular'}).then(function(response){
+		$http({method: 'GET', url: config.baseUrl + '/grupo-muscular'}).then(function(response){
 			$scope.grupamentos = response.data;
 		}, function(response){
 			console.log(response);
