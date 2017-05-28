@@ -8,6 +8,7 @@
 		<title>SigTreino</title>
 		<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
 		<link href="./css/style.css" rel="stylesheet"></link>
+		<link href="./css/angular-toast.css" rel="stylesheet"></link>
 	</head>
 	<body ng-controller="indexController">
 	
@@ -39,6 +40,7 @@
 							<li><a ng-show="!$root.isLogin" href="/academia">Cadastre-se</a></li>
 							<li><a ng-show="!$root.isLogin" href="/login" >Conectar</a></li>
 							<li><a ng-show="$root.isLogin" href="" ng-click="logoff()" >Sair</a></li>
+
 						</ul>
 					</div>
 				</div>
@@ -80,6 +82,10 @@
 		<script src="./js/interceptor/token-interceptor.js"></script>
 		<script src="./js/value/config-value.js"></script>
 		<script src="./js/filter/filter.js"></script>
+		
+		<script src="./js/others/angular-toast.js"></script>
+		
+		<script src="./js/service/modal-service.js"></script>
 		
 	</body>
 </html>

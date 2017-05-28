@@ -17,7 +17,7 @@ public class CEPController {
 	private CEPService cepService;
 	
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE, value="/cep/{cep}")
-	public ResponseEntity<String> consultarCep(@PathVariable String cep){
+	public ResponseEntity<String> consultarCep(@PathVariable String cep) throws Exception{
 		String cepEncontrado = cepService.consultarCEP(cep);
 		return new ResponseEntity<String>(cepEncontrado, HttpStatus.OK);
 	}

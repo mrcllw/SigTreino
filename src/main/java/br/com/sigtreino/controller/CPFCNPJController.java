@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sigtreino.model.Academia;
+import br.com.sigtreino.exception.ErroException;
 import br.com.sigtreino.service.CPFCNPJService;
 
 @RestController
@@ -24,10 +24,11 @@ public class CPFCNPJController {
 	}
 	
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE, value="/cpf/{cpf}")
-	public ResponseEntity<String> consultarCpf(@PathVariable String cpf) throws Exception{
-		Academia cpfEncontrado = cpfCnpjService.consultaCPF(cpf);
-		if(cpfEncontrado != null){
-			return new ResponseEntity<>(HttpStatus.FOUND);
+	public ResponseEntity<?> consultarCpf(@PathVariable String cpf) throws Exception{
+		try{
+			cpfCnpjService.consultaCPF(cpf);
+		}catch(Exception e){
+			throw new ErroException(e.getMessage(), HttpStatus.FOUND);
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

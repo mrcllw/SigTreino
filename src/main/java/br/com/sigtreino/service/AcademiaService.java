@@ -20,7 +20,14 @@ public class AcademiaService {
 	@Autowired
 	private AcademiaRepository academiaRep;
 	
-	public Academia salvar(Academia academia){
+	public Academia salvar(Academia academia) throws Exception{
+		Academia academiaBuscadaCpfCnpj = academiaRep.findByCpfCnpj(academia.getCpfCnpj());
+		Academia academiaBuscadaLogin = academiaRep.findByLogin(academia.getLogin());
+		if(academiaBuscadaCpfCnpj != null){
+			throw new Exception("Academia já cadastrada.");
+		}  else if (academiaBuscadaLogin != null){
+			throw new Exception("Login já utilizado.");
+		}
 		return academiaRep.save(academia);
 	}
 	

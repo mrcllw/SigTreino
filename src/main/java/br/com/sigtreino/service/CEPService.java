@@ -8,7 +8,7 @@ public class CEPService {
 	
 	private static final String API_URL = "http://viacep.com.br/ws/{cep}/json/";
 	
-	public String consultarCEP(String cep){
+	public String consultarCEP(String cep) throws Exception{
 		RestTemplate rt = new RestTemplate();
 		return rt.getForObject(API_URL.replace("{cep}", cep), String.class);
 	}

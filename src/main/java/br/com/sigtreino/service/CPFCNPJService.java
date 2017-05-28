@@ -32,8 +32,10 @@ public class CPFCNPJService {
 		return cnpjBuscado;
 	}
 	
-	public Academia consultaCPF(String cpf) throws Exception{
+	public void consultaCPF(String cpf) throws Exception{
 		Academia academia = academiaRep.findByCpfCnpj(cpf);
-		return academia;
+		if(academia != null){
+			throw new Exception("Academia já cadastrada.");
+		}
 	}
 }

@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.sigtreino.model.Academia;
 import br.com.sigtreino.model.Exercicio;
 import br.com.sigtreino.repository.ExercicioRepository;
 
@@ -43,10 +42,6 @@ public class ExercicioService {
 	
 	public Exercicio buscarPorId(Long id){
 		return exercicioRep.findOne(id);
-	}
-	
-	public List<Exercicio> buscarPorAcademia(Academia academia){
-		return exercicioRep.findByAcademia(academia);
 	}
 	
 	public List<Exercicio> buscarPorAcademia() throws ServletException{

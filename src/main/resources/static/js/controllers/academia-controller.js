@@ -1,4 +1,4 @@
-app.controller('academiaController', function($scope, $http, config, $location){
+app.controller('academiaController', function($scope, $http, config, $location, toastr){
 	$scope.academia = {};
 	$scope.tipo = 'fisica';
 	
@@ -6,7 +6,12 @@ app.controller('academiaController', function($scope, $http, config, $location){
 		$http({method: 'POST', url: config.baseUrl + '/academia', data:academia}).then(function(response){
 			$scope.academia={};
 			$location.path('/login');
+			toastr.success('Academia cadastrada.');
 		}, function(response){
+			if(response.status == 302){
+				toastr.error(response.data.message);
+				$scope.academia = {};
+			}
 			console.log(response);
 		});
 	};
@@ -24,7 +29,7 @@ app.controller('academiaController', function($scope, $http, config, $location){
 		if(cep.length == 8){
 			$http({method: 'GET', url: config.baseUrl + '/cep/' + cep}).then(function(response){
 				if(response.data.erro == true){
-					alert('CEP informado não encontrado.');
+					toastr.warning('CEP informado não encontrado.');
 				} else {
 					$scope.academia.logradouro=response.data.logradouro;
 					if($scope.academia.complemento == undefined || $scope.academia.complemento == null){
@@ -46,9 +51,7 @@ app.controller('academiaController', function($scope, $http, config, $location){
 				console.log(response.data);
 				console.log(response.status);
 			}, function(response){
-				if(response.status == 302){
-					alert('Academia já cadastrada.');
-				}
+				toastr.warning(response.data.message);
 			});
 		};
 	};
@@ -57,7 +60,7 @@ app.controller('academiaController', function($scope, $http, config, $location){
 		if(cnpj != undefined && cnpj.length == 14){
 			$http({method:'GET', url: config.baseUrl + '/cnpj/' + cnpj}).then(function(response){
 				if(response.data.status == 'ERROR'){
-					alert(response.data.message);
+					toastr.warning(response.data.message);
 				} else {
 					$scope.academia.dataAberturaNascimento=response.data.abertura;
 					$scope.academia.razaoSocialNomeEmpresario=response.data.nome;
@@ -74,7 +77,7 @@ app.controller('academiaController', function($scope, $http, config, $location){
 				}
 			}, function(response){
 				if(response.data.status == 500){
-					alert(response.data.message);
+					toastr.warning(response.data.message);
 				}
 				console.log(response.data);
 				console.log(response.status);

@@ -33,5 +33,13 @@ public class AlunoTreinoService {
 	public List<AlunoTreino> buscarPorAluno(Long id){
 		return alunoTreinoRep.buscarAlunoTreinoPorAlunoId(id);
 	}
+	
+	public List<AlunoTreino> buscarPorEmail(String email) throws Exception{
+		List<AlunoTreino> listaBuscada = alunoTreinoRep.buscarAlunoTreinoPorEmail(email);
+		if(listaBuscada.size() == 0){
+			throw new Exception("Não existe treino cadastrado para este email.");
+		}
+		return listaBuscada;
+	}
 
 }

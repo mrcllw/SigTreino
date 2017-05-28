@@ -1,4 +1,5 @@
-app.controller('loginController', function($scope, $rootScope, $http, $location, config){
+app.controller('loginController', function($scope, $rootScope, $http, $location, config, toastr){
+	$scope.academia = {};
 	
 	$scope.autenticar = function(academia){
 		$http.post(config.baseUrl + "/autenticar", academia).then(function(response){
@@ -6,7 +7,8 @@ app.controller('loginController', function($scope, $rootScope, $http, $location,
 			$rootScope.isLogin = true;
 			$location.path('/');
 		}, function(response){
-			console.log(response);
+			toastr.error(response.data.message);
+			$scope.academia={};
 		});
 	};
 	

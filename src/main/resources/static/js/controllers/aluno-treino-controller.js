@@ -1,4 +1,4 @@
-app.controller('alunoTreinoController', function($scope, $location, $rootScope, $http, config){
+app.controller('alunoTreinoController', function($scope, $location, $rootScope, $http, config, toastr, modalService){
 	
 	aluno = $rootScope.aluno;
 	$scope.treinosCadastro=[];
@@ -48,8 +48,10 @@ app.controller('alunoTreinoController', function($scope, $location, $rootScope, 
 			$scope.alunoTreino={};
 			$scope.alunoTreino.treino = {};
 			$scope.diasSelecionados = [];
+			toastr.success('Treino adicionado.');
 		}, function(response){
 			console.log(response.data.message);
+			$window.alert(response);
 		});
 	};
 	
@@ -60,11 +62,18 @@ app.controller('alunoTreinoController', function($scope, $location, $rootScope, 
 	};
 	
 	$scope.removerTreino = function(treino){
-		$http({method: 'DELETE', url: config.baseUrl + '/admin/aluno/treino/' + treino.id}).then(function(response){
-			$scope.carregarTreinosAluno();
+		modalService.open('modal-exclusao').result.then(function(response){
+			$http({method: 'DELETE', url: config.baseUrl + '/admin/aluno/treino/' + treino.id}).then(function(response){
+				$scope.carregarTreinosAluno();
+				toastr.success('Treino removido.');
+			}, function(response){
+				console.log(response);
+				$window.alert(response);
+			});
 		}, function(response){
-			console.log(response);
+				console.log(response);
 		});
+		
 	};
 	
 	$scope.detalhesAlunoTreino = function(treino){

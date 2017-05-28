@@ -1,4 +1,4 @@
-app.controller('exercicioController', function($scope, $rootScope, $http, $location, config){
+app.controller('exercicioController', function($scope, $rootScope, $http, $location, config, toastr, modalService){
 	$scope.exercicio = $rootScope.exercicio;
 	$scope.exercicios=[];
 	$scope.grupamentos = [];
@@ -33,8 +33,10 @@ app.controller('exercicioController', function($scope, $rootScope, $http, $locat
 			$scope.carregarExercicios();
 			$rootScope.exercicio={};
 			$location.path('/exercicios');
+			toastr.success('Exercicio cadastrado.');
 		}, function(response){
 			console.log(response);
+			$window.alert(response);
 		});
 	};
 	
@@ -44,11 +46,17 @@ app.controller('exercicioController', function($scope, $rootScope, $http, $locat
 	};
 	
 	$scope.removerExercicio = function(exercicio){
-		$http({method: 'DELETE', url: config.baseUrl + '/admin/exercicio/' + exercicio.id}).then(function(response){
-			$scope.carregarExercicios();
+		modalService.open('modal-exclusao').result.then(function(response){
+			$http({method: 'DELETE', url: config.baseUrl + '/admin/exercicio/' + exercicio.id}).then(function(response){
+				$scope.carregarExercicios();
+				toastr.success('Exercicio removido.');
+			}, function(response){
+				toastr.error(response.data.message);
+			});
 		}, function(response){
 			console.log(response);
 		});
+		
 	};
 	
 	$scope.cadastrarExercicio = function(){

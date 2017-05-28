@@ -1,4 +1,4 @@
-app.controller('treinoController', function($scope, $rootScope, $location, $http, config){
+app.controller('treinoController', function($scope, $rootScope, $location, $http, config, toastr, modalService){
 	
 	//TREINO
 	
@@ -29,8 +29,10 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 			$rootScope.atividades=[];
 			$scope.carregarTreinos();
 			$location.path('/treinos');
+			toastr.success('Treino adicionado.');
 		}, function(response){
 			console.log(response);
+			$window.alert(response);
 		});
 	};
 	
@@ -42,11 +44,17 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 	};
 	
 	$scope.removerTreino = function(treino){
-		$http({method: 'DELETE', url: config.baseUrl + '/admin/treino/' + treino.id}).then(function(response){
-			$scope.carregarTreinos();
+		modalService.open('modal-exclusao').result.then(function(response){
+			$http({method: 'DELETE', url: config.baseUrl + '/admin/treino/' + treino.id}).then(function(response){
+				$scope.carregarTreinos();
+				toastr.success('Treino removido.');
+			}, function(response){
+				toastr.error(response.data.message);
+			});
 		}, function(response){
 			console.log(response);
-		});
+		})
+		
 	};
 	
 	$scope.cadastrarTreino = function(){
@@ -101,15 +109,22 @@ app.controller('treinoController', function($scope, $rootScope, $location, $http
 		if(isEdit == false){
 			$scope.atividades.push(atividade);
 			$scope.atividade={};
+			toastr.success('Atividade adicionada.');
 		}else{
 			$scope.atividades.splice(isEditIndex, 1, atividade);
 			isEdit = false;
 			$scope.atividade={};
+			toastr.success('Atividade alterada.');
 		};
 	};
 	
 	$scope.removerAtividade = function(index){
-		$scope.atividades.splice(index, 1);
+		modalService.open('modal-exclusao').result.then(function(response){
+			$scope.atividades.splice(index, 1);
+			toastr.success('Atividade removida.');
+		}, function(response){
+			console.log(response);
+		});
 	};
 	
 	$scope.editarAtividade = function(atividade, index){

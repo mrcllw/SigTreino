@@ -1,4 +1,4 @@
-app.controller('alunoController', function($scope, $rootScope, $location, $http, config){
+app.controller('alunoController', function($scope, $rootScope, $location, $http, config, toastr, modalService){
 	
 	$scope.aluno=$rootScope.aluno;
 	$scope.alunos=[];
@@ -16,8 +16,10 @@ app.controller('alunoController', function($scope, $rootScope, $location, $http,
 			$rootScope.aluno={};
 			$scope.carregarAlunos();
 			$location.path('/alunos');
+			toastr.success('Aluno cadastrado.');
 		}, function(response){
 			console.log(response);
+			$window.alert(response);
 		});
 	};
 	
@@ -27,8 +29,13 @@ app.controller('alunoController', function($scope, $rootScope, $location, $http,
 	};
 	
 	$scope.removerAluno = function(aluno){
-		$http({method: 'DELETE', url: config.baseUrl + '/admin/aluno/' + aluno.id}).then(function(response){
-			$scope.carregarAlunos();
+		modalService.open('modal-exclusao').result.then(function(response){
+			$http({method: 'DELETE', url: config.baseUrl + '/admin/aluno/' + aluno.id}).then(function(response){
+				toastr.success('Aluno removido.');
+				$scope.carregarAlunos();
+			}, function(response){
+				console.log(response);
+			});
 		}, function(response){
 			console.log(response);
 		});
@@ -48,7 +55,7 @@ app.controller('alunoController', function($scope, $rootScope, $location, $http,
 		if(cep.length == 8){
 			$http({method: 'GET', url: config.baseUrl + '/cep/' + cep}).then(function(response){
 				if(response.data.erro == true){
-					alert('CEP informado não encontrado.');
+					toastr.warning('CEP informado não encontrado.');
 				} else {
 					$scope.aluno.logradouro=response.data.logradouro;
 					if($scope.aluno.complemento == undefined || $scope.aluno.complemento == null){

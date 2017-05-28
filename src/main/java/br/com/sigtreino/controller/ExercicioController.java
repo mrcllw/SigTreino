@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.sigtreino.exception.ErroException;
 import br.com.sigtreino.model.Exercicio;
 import br.com.sigtreino.service.ExercicioService;
 
@@ -44,7 +45,12 @@ public class ExercicioController {
 		if(exercicioEncontrado == null){
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		exercicioSer.excluir(exercicioEncontrado);
+		
+		try{
+			exercicioSer.excluir(exercicioEncontrado);
+		} catch (Exception e){
+			throw new ErroException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

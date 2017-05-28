@@ -1,4 +1,4 @@
-var app = angular.module('app',['ui.bootstrap', 'ngRoute', 'ngAnimate', 'ngMask']);
+var app = angular.module('app',['ui.bootstrap', 'ngRoute', 'ngAnimate', 'ngMask', 'toastr']);
 
 app.config(function($routeProvider){
 	$routeProvider
